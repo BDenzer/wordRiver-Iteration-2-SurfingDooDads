@@ -4,15 +4,24 @@ angular.module('WordRiverApp')
   .controller('DashboardCtrl', function ($scope, $http, socket) {
     $scope.message = 'Hello';
 
+    $scope.studentsId = [];
     $scope.students = [];
-    $scope.getStudents = function() {
+
+    $scope.getStudentId = function() {
       $http.get('/api/users/me').success(function(user) {
         console.log(user);
-        $scope.students = user.studentGroups;
+        $scope.studentsId = user.studentGroups;
         console.log($scope.packs);
       });
-    }
-    $scope.getStudents();
+    };
+
+    $scope.getStudentsFromId = function() {
+      $http.get('/api/students').success(function (student) {
+        for(var i = 0; $scope.studentsId.length; i++){
+          $scope.students.add(student.findById($scope.studentsId[i]));
+        }
+      });
+    };
 
     $scope.showdetails = function(group) {
       document.getElementById("studentList").innerHTML = "";
