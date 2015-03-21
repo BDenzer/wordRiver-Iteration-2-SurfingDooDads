@@ -21,41 +21,70 @@ User.find({}).remove(function() {
       "contextPacks": [{
         "contextName": "nouns",
         "contents":[
-          {"wordName": "house",
-            "wordType": "noun",
-            "wordColor": "green"},
-          {"wordName": "jump",
-            "wordType": "noun",
-            "wordColor": "green"},
-          {"wordName": "walk",
-            "wordType": "noun",
-            "wordColor": "green"}
+          {_id: 1},
+          {_id: 2},
+          {_id: 3},
+          {_id: 4},
+          {_id: 5}
         ]
-      }],
+      },
+        {
+          "contextName": "animals",
+          "contents":[
+            {_id: 6},
+            {_id: 7},
+            {_id: 8},
+            {_id: 9},
+            {_id: 10}
+          ]
+        },
+        {
+          "contextName": "dinosaurs",
+          "contents":[
+            {_id: 11},
+            {_id: 12},
+            {_id: 13},
+            {_id: 14},
+            {_id: 15}
+          ]
+        }]
+      ,
       "tileBucket": [
         {"wordName": "house",
           "wordType": "noun",
-          "wordColor": "green"},
+        _id: 1},
         {"wordName": "jump",
           "wordType": "noun",
-          "wordColor": "green"},
+          _id: 2
+        },
         {"wordName": "walk",
           "wordType": "noun",
-          "wordColor": "green"}
+          _id: 3
+        }
       ],
 
       "studentGroups": [
         {
-          "groupName": "in",
+          "groupName": "Classroom",
           "students": [
-            {
-              "name": "Trina"
-            }
+            {_id: 1},
+            {_id: 2},
+            {_id: 3},
+            {_id: 4},
+            {_id: 5}
+          ]
+        },
+        {
+          "groupName": "Kids that like dinosaurs",
+          "students": [
+            {_id: 1},
+            {_id: 3},
+            {_id: 4}
           ]
         }
       ]
-    },
-    {
+    }
+    /*,{
       "name": "Lavonne Cochran",
       "email": "lavonnecochran@puria.com",
       "role": {
@@ -500,7 +529,7 @@ User.find({}).remove(function() {
           ]
         }
       ]
-    }
+    }*/
   );
 });
 
@@ -509,32 +538,37 @@ Student.find({}).remove(function() {
   Student.create(
     {
       "firstName": "Liza",
-      "lastName": "Pratt"
+      "lastName": "Pratt",
+      "_id": 1
     },
     {
       "firstName": "Battle",
-      "lastName": "Whitaker"
+      "lastName": "Whitaker",
+      "_id": 2
     },
     {
       "firstName": "Leanna",
-      "lastName": "Garrison"
+      "lastName": "Garrison",
+      "_id": 3
     },
     {
       "firstName": "Sherman",
-      "lastName": "Foster"
+      "lastName": "Foster",
+      "_id": 4
     },
     {
       "firstName": "Cassie",
-      "lastName": "Ramos"
-    },
-    {
+      "lastName": "Ramos",
+      "_id": 5
+    }
+    /*{
       "firstName": "Calderon",
       "lastName": "Daniel"
     },
     {
       "firstName": "Shanna",
       "lastName": "Boyle"
-    }
+    }*/
 
   );
 });
