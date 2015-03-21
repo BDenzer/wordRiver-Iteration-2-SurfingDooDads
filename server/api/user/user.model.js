@@ -14,24 +14,28 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  contextPacks: [{
+  /*contextPacks: [{
     contextName: String,
     contents:[{
       wordName: String,
       wordType: String,
       wordColor: String
     }]
-  }],
+  }],*/
   tileBucket: [{
       wordName: String,
       wordType: String,
-      wordColor: String
+      description: String,
+      contextPacks: [{
+        name: String
+      }]
   }],
   studentGroups: [
     {
       groupName: String,
       students: [{
-        name: String
+        //name: String
+        //Some type of reference to the student database needs to go here
       }]
     }
   ]
