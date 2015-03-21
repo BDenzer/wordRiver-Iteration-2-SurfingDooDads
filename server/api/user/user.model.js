@@ -11,7 +11,7 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
-  /*hashed*/Password: String,
+  hashedPassword: String,
   provider: String,
   salt: String,
   contextPacks: [{

@@ -16,10 +16,10 @@ User.find({}).remove(function() {
       "role": {
         "type": "user"
       },
-      "password": "deserunt",
+      "hashedPassword": "deserunt",
       "provider": "local",
       "contextPacks": [{
-        "contextName": "nouns",
+        "contextName": "verbs",
         "contents":[
           {_id: 1},
           {_id: 2},
@@ -50,16 +50,60 @@ User.find({}).remove(function() {
         }]
       ,
       "tileBucket": [
-        {"wordName": "house",
+        {"wordName": "run",
           "wordType": "noun",
         _id: 1},
-        {"wordName": "jump",
+        {"wordName": "walk",
           "wordType": "noun",
           _id: 2
         },
-        {"wordName": "walk",
+        {"wordName": "jump",
           "wordType": "noun",
           _id: 3
+        },
+        {"wordName": "swim",
+          "wordType": "noun",
+          _id: 4},
+        {"wordName": "throw",
+          "wordType": "noun",
+          _id: 5
+        },
+        {"wordName": "dog",
+          "wordType": "noun",
+          _id: 6
+        },
+        {"wordName": "cat",
+          "wordType": "noun",
+          _id: 7},
+        {"wordName": "bird",
+          "wordType": "noun",
+          _id: 8
+        },
+        {"wordName": "fish",
+          "wordType": "noun",
+          _id: 9
+        },
+        {"wordName": "ferret",
+          "wordType": "noun",
+          _id: 10},
+        {"wordName": "t-rex",
+          "wordType": "noun",
+          _id: 11
+        },
+        {"wordName": "velociraptor",
+          "wordType": "noun",
+          _id: 12
+        },
+        {"wordName": "flying dinosaur",
+          "wordType": "nmaoun",
+          _id: 13},
+        {"wordName": "big",
+          "wordType": "noun",
+          _id: 14
+        },
+        {"wordName": "Steven Spielberg",
+          "wordType": "noun",
+          _id: 15
         }
       ],
 
