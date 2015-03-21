@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 var StudentSchema = new Schema({
   "firstName": String,
   "lastName": String,
-  "gender": String,
+  //"gender": String,
   "grade": String
 });
 
