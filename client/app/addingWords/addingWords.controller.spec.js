@@ -3,7 +3,7 @@
 describe('Controller: AddingWordsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('wordRiverTeamFtlApp'));
+  beforeEach(module('WordRiverApp'));
   beforeEach(module('socketMock'));
 
 
