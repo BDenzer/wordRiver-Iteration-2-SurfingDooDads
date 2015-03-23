@@ -18,14 +18,14 @@ var UserSchema = new Schema({
     contextName: String,
     contents:[{
       //references to tilebucket words
-      id: Schema.ObjectId
+      //_id: Schema.ObjectId
     }]
   }],
   tileBucket: [{
-      id: Schema.ObjectId,
+      //_id: Schema.ObjectId,
       wordName: String,
       wordType: String,
-      description: String,
+      //description: String,
       contextPacks: [{
         name: String
         //a list of the context packs a word belongs to,
@@ -37,7 +37,7 @@ var UserSchema = new Schema({
       students: [{
         //name: String
         //Some type of reference to the student database needs to go here
-        id: Schema.ObjectId
+        //_id: Schema.ObjectId
       }]
     }
   ]

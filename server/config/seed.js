@@ -16,94 +16,94 @@ User.find({}).remove(function() {
       "role": {
         "type": "user"
       },
-      "hashedPassword": "deserunt",
+      "password": "deserunt",
       "provider": "local",
       "contextPacks": [{
         "contextName": "verbs",
         "contents":[
-          {_id: 1},
-          {_id: 2},
-          {_id: 3},
-          {_id: 4},
-          {_id: 5}
+          {id: 1},
+          //{id: 2},
+          //{id: 3},
+          //{id: 4},
+          {id: 5}
         ]
       },
         {
           "contextName": "animals",
           "contents":[
-            {_id: 6},
-            {_id: 7},
-            {_id: 8},
-            {_id: 9},
-            {_id: 10}
+            {id: 6},
+            //{id: 7},
+            //{id: 8},
+            //{id: 9},
+            {id: 10}
           ]
         },
         {
           "contextName": "dinosaurs",
           "contents":[
-            {_id: 11},
-            {_id: 12},
-            {_id: 13},
-            {_id: 14},
-            {_id: 15}
+            {id: 11},
+           // {id: 12},
+           // {id: 13},
+            //{id: 14},
+            {id: 15}
           ]
         }]
       ,
       "tileBucket": [
         {"wordName": "run",
           "wordType": "noun",
-        _id: 1},
+        id: 1},
         {"wordName": "walk",
           "wordType": "noun",
-          _id: 2
+          id: 2
         },
         {"wordName": "jump",
           "wordType": "noun",
-          _id: 3
+          id: 3
         },
         {"wordName": "swim",
           "wordType": "noun",
-          _id: 4},
+          id: 4},
         {"wordName": "throw",
           "wordType": "noun",
-          _id: 5
+          id: 5
         },
         {"wordName": "dog",
           "wordType": "noun",
-          _id: 6
+          id: 6
         },
         {"wordName": "cat",
           "wordType": "noun",
-          _id: 7},
+          id: 7},
         {"wordName": "bird",
           "wordType": "noun",
-          _id: 8
+          id: 8
         },
         {"wordName": "fish",
           "wordType": "noun",
-          _id: 9
+          id: 9
         },
         {"wordName": "ferret",
           "wordType": "noun",
-          _id: 10},
+          id: 10},
         {"wordName": "t-rex",
           "wordType": "noun",
-          _id: 11
+          id: 11
         },
         {"wordName": "velociraptor",
           "wordType": "noun",
-          _id: 12
+          id: 12
         },
         {"wordName": "flying dinosaur",
           "wordType": "nmaoun",
-          _id: 13},
+          id: 13},
         {"wordName": "big",
           "wordType": "noun",
-          _id: 14
+          id: 14
         },
         {"wordName": "Steven Spielberg",
           "wordType": "noun",
-          _id: 15
+          id: 15
         }
       ],
 
@@ -111,19 +111,19 @@ User.find({}).remove(function() {
         {
           "groupName": "Classroom",
           "students": [
-            {_id: 1},
-            {_id: 2},
-            {_id: 3},
-            {_id: 4},
-            {_id: 5}
+            {id: 1},
+           // {id: 2},
+           // {id: 3},
+           // {id: 4},
+            {id: 5}
           ]
         },
         {
           "groupName": "Kids that like dinosaurs",
           "students": [
-            {_id: 1},
-            {_id: 3},
-            {_id: 4}
+            {id: 1},
+           // {id: 3},
+            {id: 4}
           ]
         }
       ]
@@ -581,29 +581,24 @@ console.log("Test");
 Student.find({}).remove(function() {
   Student.create(
     {
-      "firstName": "Liza",
-      "lastName": "Pratt",
-      "_id": 1
+      "firstName": "Lizard",
+      "lastName": "Pratt"
     },
     {
       "firstName": "Battle",
-      "lastName": "Whitaker",
-      "_id": 2
+      "lastName": "Whitaker"
     },
     {
       "firstName": "Leanna",
-      "lastName": "Garrison",
-      "_id": 3
+      "lastName": "Garrison"
     },
     {
       "firstName": "Sherman",
-      "lastName": "Foster",
-      "_id": 4
+      "lastName": "Foster"
     },
     {
       "firstName": "Cassie",
-      "lastName": "Ramos",
-      "_id": 5
+      "lastName": "Ramos"
     }
     /*{
       "firstName": "Calderon",

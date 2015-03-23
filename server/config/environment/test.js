@@ -5,6 +5,6 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/wordrivermerge-test'
+    uri: 'mongodb://localhost/wordriver-test'
   }
 };

@@ -5,7 +5,7 @@
 module.exports = {
   // MongoDB connection options
   mongo: {
-    uri: 'mongodb://localhost/wordrivermerge-dev'
+    uri: 'mongodb://localhost/wordriver-dev'
   },
 
   seedDB: true
