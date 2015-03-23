@@ -14,22 +14,16 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  contextPacks: [{
-    contextName: String,
-    contents:[{
-      //references to tilebucket words
-      //_id: Schema.ObjectId
-    }]
+  tileTag: [{
+    tagName: String,
+    tagType: String
   }],
   tileBucket: [{
       //_id: Schema.ObjectId,
       wordName: String,
       wordType: String,
       //description: String,
-      contextPacks: [{
-        name: String
-        //a list of the context packs a word belongs to,
-      }]
+      tileTags: [ObjectId]
   }],
   studentGroups: [
     {
