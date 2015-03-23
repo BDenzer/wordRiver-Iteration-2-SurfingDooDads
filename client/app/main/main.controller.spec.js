@@ -3,7 +3,7 @@
 describe('Controller: MainCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('wordRiverMergeApp'));
+  beforeEach(module('WordRiverApp'));
   beforeEach(module('socketMock'));
 
   var MainCtrl,
@@ -21,11 +21,6 @@ describe('Controller: MainCtrl', function () {
       $scope: scope
     });
   }));
-
-  it('should attach a list of things to the scope', function () {
-    $httpBackend.flush();
-    expect(scope.students.length).toBe(4);
-  });
 
   it('testing totalClasses function', function () {
     scope.students.push({class: 'Kindergarten'});

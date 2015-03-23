@@ -3,7 +3,7 @@
 describe('Controller: TileBucketCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('ummWordRiverTeam1Iteration1App'));
+  beforeEach(module('WordRiverApp'));
   beforeEach(module('socketMock'));
 
   var TileBucketCtrl, scope;

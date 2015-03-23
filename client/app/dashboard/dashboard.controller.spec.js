@@ -3,7 +3,7 @@
 describe('Controller: DashboardCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('ummWordRiverTeam1Iteration1App'));
+  beforeEach(module('WordRiverApp'));
   beforeEach(module('socketMock'));
 
   var DashboardCtrl, scope;

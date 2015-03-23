@@ -3,7 +3,7 @@
 describe('Controller: OverviewCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('wordRiverSpaceshipParrotIteration1App'));
+  beforeEach(module('WordRiverApp'));
   beforeEach(module('socketMock'));
 
   var OverviewCtrl,
