@@ -64,7 +64,7 @@ User.find({}).remove(function() {
 
       "tileBucket": [
         {"wordName": "run",
-          "tileTags": ["5511a5963b3e4c433b21f8e1"],
+          "tileTags": ["5511a5963b3e4c433b21f8e1", "5511a5963b3e4c433b21f8e0"],
           "_id" : "5511a62046b5a58e3b0271f7"
           //"wordType": "verb",
         },
