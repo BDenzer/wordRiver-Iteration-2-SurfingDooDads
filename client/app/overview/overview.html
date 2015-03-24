@@ -44,20 +44,17 @@
 
         <div class="col-xs-4">
             <div ng-show="showPack">
-                <h1 class="page-header">Tiles in {{currentPack.packName}}:</h1>
-                <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="tile in currentPack.tiles track by $index">
-                    <li>{{tile}}<button type="button" class="close" ng-click="deleteTile(currentPack, $index)">&times;</button></li>
-                </ul>
-                <div ng-hide="showTileAdder">
-                <a href="#" ng-click="toggleShowAdder()">Add a card...</a>
-                </div>
-                <div ng-show="showTileAdder">
-                    <form ng-submit="addTile()" >
-                        <input ng-model="tileField" type="text" size="20" placeholder="add a tile!">
-                        <input type="submit" value="Add" class="btn btn-primary" ng-click="toggleShowAdder()">
-                    </form>
 
-                 </div>
+                <h1 class="page-header">Tiles in {{currentPack.packName}}:</h1>
+                <ul class="list-group" >
+                  <li class="list-group-item">
+                    <form ng-submit="addTile()">
+                      <input ng-model="tileField" type="text" size="15" placeholder="add a card!">
+                      <input type="submit" value="submit" class="btn btn-primary">
+                    </form>
+                  </li>
+                    <li ng-repeat="tile in currentPack.tiles track by $index" class="list-group-item">{{tile}}<button type="button" class="close" ng-click="deleteTile(currentPack, $index)">&times;</button></li>
+                </ul>
             </div>
 
             </div>
