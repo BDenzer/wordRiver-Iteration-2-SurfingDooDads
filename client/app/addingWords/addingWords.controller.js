@@ -27,7 +27,7 @@ angular.module('WordRiverApp')
           <!--these words will be going into the individuals page, possibly the class words, and added to her program (words they can use) -->
           $http.post('/api/users/me', {words: $scope.wordField}).success(function () {
             $scope.getWords();
-            $scope.allWords.push({words: $scope.wordField});
+            $scope.currentWords.push({words: $scope.wordField});
             $scope.wordField = "";
           });
       }
