@@ -17,7 +17,7 @@ angular.module('WordRiverApp')
     $scope.getPacks = function() {
       $http.get('/api/packs').success(function (contextPack) {
         $scope.contextPacks = contextPack;
-        socket.syncUpdates('pack', $scope.contextPacks);
+        //socket.syncUpdates('pack', $scope.contextPacks);
       });
     };
 
@@ -31,6 +31,7 @@ angular.module('WordRiverApp')
 
     $scope.deletePack = function(index) {
       $http.delete('/api/packs/' + $scope.contextPacks[index]._id)
+      $scope.contextPacks.splice(index, 1);
     };
 
     //$scope.deleteTile = function(pack,index) {
@@ -44,6 +45,7 @@ angular.module('WordRiverApp')
     $scope.addContextPacks = function () {
       if ($scope.textField.length >= 1) {
         $http.post('/api/packs', {packName: $scope.textField, tiles: []});
+        $scope.contextPacks.push({packName: $scope.textField, tiles: []});
       }
       $scope.textField="";
     };
