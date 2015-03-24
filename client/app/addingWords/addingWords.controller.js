@@ -14,7 +14,7 @@ angular.module('WordRiverApp')
     //beforeEach(module('socketMock'));
 
     $scope.getWords = function(){
-      $http.get('/api/AddingWordsDatabases').success(function(AllWordsDatabases) {
+      $http.get('/api/users/me').success(function(AllWordsDatabases) {
         $scope.currentWords = AllWordsDatabases;
         $scope.allWords = $scope.currentWords;
       });
@@ -25,11 +25,11 @@ angular.module('WordRiverApp')
     $scope.addWords = function(){
       if($scope.wordField.length >= 1) {
           <!--these words will be going into the individuals page, possibly the class words, and added to her program (words they can use) -->
-          $http.post('/api/AddingWordsDatabases', {words: $scope.wordField}).success(function () {
+          $http.post('/api/users/me', {words: $scope.wordField}).success(function () {
             $scope.getWords();
             $scope.allWords.push({words: $scope.wordField});
+            $scope.wordField = "";
           });
-          $scope.wordField = "";
       }
     };
 
@@ -49,7 +49,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.removeData = function(index){
-      $http.delete('/api/AddingWordsDatabases/' + $scope.allWords[index]._id).success(function(){
+      $http.delete('/api/users/me/' + $scope.allWords[index]._id).success(function(){
         $scope.getWords();
       });
     };
@@ -113,29 +113,6 @@ angular.module('WordRiverApp')
     $scope.filterText = null;
     $rootScope.currentStudent = null;
 
-
-    $http.get('/api/things').success(function(students) {
-      $scope.students = students;
-      socket.syncUpdates('thing', $scope.students);
-      $scope.totalClasses();
-      $scope.populateStudentArray();
-    });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
-    };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
-    };
-
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
 
     //creates a list of all classes that exist
     $scope.totalClasses = function(){
