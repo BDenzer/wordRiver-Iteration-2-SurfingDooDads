@@ -8,6 +8,7 @@ angular.module('WordRiverApp')
 
     $scope.textField = "";
     $scope.tileField = "";
+    $scope.tileType= "";
 
     $scope.showPack = false;
     $scope.currentPack = null;
@@ -48,8 +49,8 @@ angular.module('WordRiverApp')
     };
 
     $scope.addTile = function() {
-      if ($scope.tileField.length >= 1) {
-        $scope.currentPack.tiles.push($scope.tileField);
+      if ($scope.tileField.length >= 1 && $scope.tileType.length > 0) {
+        $scope.currentPack.tiles.push({word: $scope.tileField, type: $scope.tileType});
 
         $http.patch('/api/packs/' + $scope.currentPack._id,
           {tiles: $scope.currentPack.tiles}
@@ -66,7 +67,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.deleteTile = function(pack, index) {
-      pack.tiles.splice(index, 1)
+      pack.tiles.splice(index, 1);
       $http.patch('/api/packs/' + pack._id,
         {tiles: pack.tiles}
       ).success(function() {

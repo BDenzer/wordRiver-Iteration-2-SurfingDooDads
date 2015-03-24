@@ -27,6 +27,23 @@ describe('Controller: OverviewCtrl', function () {
   it('this is a sanity check', function () {
     expect(true).toBe(true);
   });
+
+  it('should be true', function () {
+    scope.currentPack = {tiles: []};
+    scope.addTile();
+    expect(scope.currentPack.tiles.length).toBe(0);
+    scope.tileField = "Word";
+    scope.addTile();
+    expect(scope.currentPack.tiles.length).toBe(0);
+    scope.tileType = "Type";
+    scope.addTile();
+    expect(scope.currentPack.tiles.length).toBe(1);
+    scope.addTile();
+    expect(scope.currentPack.tiles.length).toBe(1);
+    expect(scope.currentPack.tiles[0].word).toBe("Word");
+    expect(scope.currentPack.tiles[0].type).toBe("Type");
+
+  });
   //it('should attach a list of things to the scope', function () {
   //  $httpBackend.flush();
   //  expect(scope.awesomeThings.length).toBe(4);
