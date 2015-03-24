@@ -18,7 +18,7 @@ User.find({}).remove(function() {
       },
       "password": "deserunt",
       "provider": "local",
-      "contextPacks": [{
+     /* "contextPacks": [{
         "contextName": "verbs",
         "contents":[
           {id: 1},
@@ -47,83 +47,106 @@ User.find({}).remove(function() {
             //{id: 14},
             {id: 15}
           ]
-        }]
-      ,
+        }]*/
+
+      tileTags: [
+        {
+        tagName: "Verbs",
+        tagType: "WordType",
+          "_id" : "5511a5963b3e4c433b21f8e1"
+      },
+        {
+          tagName: "Dinosaur",
+          tagType: "Context",
+          "_id" : "5511a5963b3e4c433b21f8e0"
+        }
+      ],
+
       "tileBucket": [
         {"wordName": "run",
-          "wordType": "noun",
-        id: 1},
+          "tileTags": ["5511a5963b3e4c433b21f8e1"],
+          "_id" : "5511a62046b5a58e3b0271f7"
+          //"wordType": "verb",
+        },
         {"wordName": "walk",
-          "wordType": "noun",
-          id: 2
+          "tileTags": ["5511a5963b3e4c433b21f8e1"],
+          "_id" : "5511a62046b5a58e3b0271f6"
         },
         {"wordName": "jump",
-          "wordType": "noun",
-          id: 3
+          "tileTags": ["5511a5963b3e4c433b21f8e1"],
+          "_id" : "5511a62046b5a58e3b0271f5"
         },
-        {"wordName": "swim",
-          "wordType": "noun",
-          id: 4},
-        {"wordName": "throw",
-          "wordType": "noun",
-          id: 5
+        //{"wordName": "swim",
+        //  "wordType": "noun",
+        //  id: 4},
+        //{"wordName": "throw",
+        //  "wordType": "noun",
+        //  id: 5
+        //},
+        //{"wordName": "dog",
+        //  "wordType": "noun",
+        //  id: 6
+        //},
+        //{"wordName": "cat",
+        //  "wordType": "noun",
+        //  id: 7},
+        //{"wordName": "bird",
+        //  "wordType": "noun",
+        //  id: 8
+        //},
+        //{"wordName": "fish",
+        //  "wordType": "noun",
+        //  id: 9
+        //},
+        //{"wordName": "ferret",
+        //  "wordType": "noun",
+        //  id: 10},
+        //{"wordName": "t-rex",
+        //  "wordType": "noun",
+        //  id: 11
+        //},
+        //{"wordName": "velociraptor",
+        //  "wordType": "noun",
+        //  id: 12
+        //},
+        {"wordName": "dinosaur",
+          "tileTags": ["5511a5963b3e4c433b21f8e0"],
+          "_id" : "5511a62046b5a58e3b0271f4"
         },
-        {"wordName": "dog",
-          "wordType": "noun",
-          id: 6
-        },
-        {"wordName": "cat",
-          "wordType": "noun",
-          id: 7},
-        {"wordName": "bird",
-          "wordType": "noun",
-          id: 8
-        },
-        {"wordName": "fish",
-          "wordType": "noun",
-          id: 9
-        },
-        {"wordName": "ferret",
-          "wordType": "noun",
-          id: 10},
-        {"wordName": "t-rex",
-          "wordType": "noun",
-          id: 11
-        },
-        {"wordName": "velociraptor",
-          "wordType": "noun",
-          id: 12
-        },
-        {"wordName": "flying dinosaur",
-          "wordType": "nmaoun",
-          id: 13},
         {"wordName": "big",
-          "wordType": "noun",
-          id: 14
+          "tileTags": ["5511a5963b3e4c433b21f8e0"],
+          "_id" : "5511a62046b5a58e3b0271f3"
         },
         {"wordName": "Steven Spielberg",
-          "wordType": "noun",
-          id: 15
+          "tileTags": ["5511a5963b3e4c433b21f8e0"],
+          "_id" : "5511a62046b5a58e3b0271f2"
         }
+      ],
+
+      "studentList": [
+        "551072458e97142166a71951",
+        "551072458e97142166a71952",
+        "551072458e97142166a71954"
       ],
 
       "studentGroups": [
         {
           "groupName": "Classroom",
           "students": [
-            {id: 1},
+            "551072458e97142166a71951",
            // {id: 2},
            // {id: 3},
            // {id: 4},
-            {id: 5}
+            "551072458e97142166a71954"
           ]
         },
         {
           "groupName": "Kids that like dinosaurs",
           "students": [
-            {id: 1},
+            "551072458e97142166a71951",
+            "551072458e97142166a71952"
            // {id: 3},
-            {id: 4}
+            //{id: 4}
           ]
         }
       ]
@@ -582,23 +605,28 @@ Student.find({}).remove(function() {
   Student.create(
     {
       "firstName": "Lizard",
-      "lastName": "Pratt"
+      "lastName": "Pratt",
+      "_id" : "551072458e97142166a71951"
     },
     {
       "firstName": "Battle",
-      "lastName": "Whitaker"
+      "lastName": "Whitaker",
+      "_id" : "551072458e97142166a71952"
     },
     {
       "firstName": "Leanna",
-      "lastName": "Garrison"
+      "lastName": "Garrison",
+      "_id" : "551072458e97142166a71953"
     },
     {
       "firstName": "Sherman",
-      "lastName": "Foster"
+      "lastName": "Foster",
+      "_id" : "551072458e97142166a71955"
     },
     {
       "firstName": "Cassie",
-      "lastName": "Ramos"
+      "lastName": "Ramos",
+      "_id" : "551072458e97142166a71954"
     }
     /*{
       "firstName": "Calderon",
