@@ -14,28 +14,24 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  tileTag: [{
+  tileTags: [{
     tagName: String,
     tagType: String
   }],
   tileBucket: [{
       //_id: Schema.ObjectId,
       wordName: String,
-      wordType: String,
+      //wordType: String,
       //description: String,
-      tileTags: [ObjectId]
+      tileTags: [Schema.ObjectId]
   }],
+  studentList: [Schema.ObjectId],
   studentGroups: [
     {
       groupName: String,
-      students: [{
-        //name: String
-        //Some type of reference to the student database needs to go here
-        //_id: Schema.ObjectId
-      }]
+      students: [Schema.ObjectId]
     }
   ]
-
 });
 
 /**
