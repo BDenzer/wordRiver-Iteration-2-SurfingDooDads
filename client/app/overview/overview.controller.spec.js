@@ -11,12 +11,12 @@ describe('Controller: OverviewCtrl', function () {
       $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
-    $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/packs')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
-    $httpBackend.expectGET('/api/students')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+  beforeEach(inject(function (/*_$httpBackend_,*/ $controller, $rootScope) {
+  //  $httpBackend = _$httpBackend_;
+  //  $httpBackend.expectGET('/api/packs')
+  //    .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
+  //  $httpBackend.expectGET('/api/students')
+  //    .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 
     scope = $rootScope.$new();
     OverviewCtrl = $controller('OverviewCtrl', {
