@@ -66,9 +66,9 @@ describe('Controller: OverviewCtrl', function () {
 
   it('toggleShowAdder test', function () {
     scope.showTileAdder = false;
-    scope.toggleShowAdder()
+    scope.toggleShowAdder();
     expect(scope.showTileAdder).toBe(true);
-    scope.toggleShowAdder()
+    scope.toggleShowAdder();
     expect(scope.showTileAdder).toBe(false);
 
   });

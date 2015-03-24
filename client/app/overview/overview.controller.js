@@ -15,12 +15,42 @@ angular.module('WordRiverApp')
     $scope.showTileAdder = false;
 
     $scope.getPacks = function() {
-      $http.get('/api/packs').success(function (contextPack) {
-        $scope.contextPacks = contextPack;
+      $http.get('/api/users/me').success(function (user) {
+        $scope.contextPacks = $scope.parsePack(user);
         //socket.syncUpdates('pack', $scope.contextPacks);
       });
     };
 
+    $scope.parsePack = function(contextPack){
+      var data = [];
+      for(var i = 0; i < contextPack.tileTags.length; i++){
+        data.push({packName: contextPack.tileTags[i].tagName, tiles: [], _id: contextPack.tileTags[i]._id});
+      }
+
+      for(var j = 0; j < contextPack.tileBucket.length; j++){
+        var ids = $scope.idInArray(data ,contextPack.tileBucket[j].tileTags);
+        if(ids.result){
+          for(var k = 0; k < ids.index.length; k++){
+            data[ids.index[k]].tiles.push(contextPack.tileBucket[j]);
+          }
+        }
+      }
+      console.log(data[0].tiles[0].wordName);
+      return data;
+    };
+
+      $scope.idInArray = function(array, tileTags){
+        var result = false;
+        var indexes = [];
+        for(var i = 0; i < array.length; i++){
+          for(var j = 0; j < tileTags.length; j++)
+            if(array[i]._id == tileTags[j]){
+              result = true;
+              indexes.push(i);
+            }
+        }
+        return {result: result, index: indexes};
+      }
     $scope.getPacks();
 
     $http.get('/api/students').success(function(studentList) {
@@ -30,7 +60,7 @@ angular.module('WordRiverApp')
 
 
     $scope.deletePack = function(index) {
-      $http.delete('/api/packs/' + $scope.contextPacks[index]._id)
+      $http.delete('/api/packs/' + $scope.contextPacks[index]._id);
       $scope.contextPacks.splice(index, 1);
     };
 
