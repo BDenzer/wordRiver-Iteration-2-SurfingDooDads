@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var Student = require('../student/student.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -77,6 +78,16 @@ exports.changePassword = function(req, res, next) {
       res.send(403);
     }
   });
+};
+
+exports.getUserStudents = function(user) {
+
+ //for(var i = 0; i < user.studentList.length; i++){
+   var studentId;
+   studentId = user.studentList[0];
+   return Student.findById(studentId).firstName;
+ //};
+ // return "Lizard";
 };
 
 exports.updatePack = function(req, res, next) {
