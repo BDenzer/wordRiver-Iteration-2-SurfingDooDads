@@ -8,20 +8,29 @@ angular.module('WordRiverApp')
     $scope.students = [];
 
     $scope.getStudentId = function() {
+      //console.log("hi there");
       $http.get('/api/users/me').success(function(user) {
-        console.log(user);
-        $scope.studentsId = user.studentGroups;
-        console.log($scope.packs);
+        //console.log(user);
+        $scope.studentsId = user.studentList;
+        //console.log($scope.studentsId);
+        //console.log($scope.packs);
       });
     };
 
+    $scope.getStudentId();
+
+
     $scope.getStudentsFromId = function() {
-      $http.get('/api/students').success(function (student) {
-        for(var i = 0; $scope.studentsId.length; i++){
-          $scope.students.add(student.findById($scope.studentsId[i]));
-        }
+      $http.get('/api/students/:id').success(function (student) {
+        console.log(student);
+        //for(var i = 0; i < $scope.studentsId.length; i++){
+        //  $scope.students.push(student.findById($scope.studentsId[i]));
+        //}
+        //console.log($scope.students);
       });
     };
+
+    $scope.getStudentsFromId();
 
     $scope.showdetails = function(group) {
       document.getElementById("studentList").innerHTML = "";
