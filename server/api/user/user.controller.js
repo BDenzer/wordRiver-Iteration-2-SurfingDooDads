@@ -82,18 +82,16 @@ exports.changePassword = function(req, res, next) {
 exports.updatePack = function(req, res, next) {
   var userId = req.user._id;
 
-  //var updates = req.body.user;
+  var tagName = req.body.tagName;
+  var packType = req.body.packType;
+  console.log("am i working")
 
   User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
-      //user = updates;
+      user.tileTags.push({"tagName": tagName, "packType": packType});
       user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
       });
-    } else {
-      res.send(403);
-    }
   });
 };
 

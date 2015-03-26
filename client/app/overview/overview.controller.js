@@ -3,7 +3,7 @@
 angular.module('WordRiverApp')
   .controller('OverviewCtrl', function ($scope, $http, socket) {
     $scope.studentList = [];
-
+    $scope.userId = "";
     $scope.contextPacks = [];
 
     $scope.textField = "";
@@ -17,6 +17,7 @@ angular.module('WordRiverApp')
     $scope.getPacks = function() {
       $http.get('/api/users/me').success(function (user) {
         $scope.contextPacks = $scope.parsePack(user);
+        $scope.userId = user._id;
         //socket.syncUpdates('pack', $scope.contextPacks);
       });
     };
@@ -74,7 +75,7 @@ angular.module('WordRiverApp')
 
     $scope.addContextPacks = function () {
       if ($scope.textField.length >= 1) {
-        $http.post('/api/packs', {packName: $scope.textField, tiles: []});
+        $http.put('/api/users/' + $scope.userId + "/updatePack", {tagName: $scope.textField, packType: "context"});
         $scope.contextPacks.push({packName: $scope.textField, tiles: []});
       }
       $scope.textField="";
