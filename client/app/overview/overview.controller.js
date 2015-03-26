@@ -35,7 +35,7 @@ angular.module('WordRiverApp')
           }
         }
       }
-      console.log(data[0].tiles[0].wordName);
+      //console.log(data[0].tiles[0].wordName);
       return data;
     };
 

@@ -120,6 +120,22 @@ describe('Controller: OverviewCtrl', function () {
     expect(scope.contextPacks.length).toBe(0);
 
   });
+
+  it('idInArray test', function () {
+    scope.contextPacks = [];
+    scope.contextPacks[0] = {tiles: []};
+    scope.contextPacks[0].tiles = [{word: "Word", type: "Type",_id: "id"}, {word: "New", type: "Type"}, {word: "Pack", type: "Type"}, {word: "WordPack", type: "Type"}];
+    expect(scope.idInArray(scope.contextPacks[0].tiles, ["id"]).index[0]).toBe(0)
+    expect(scope.idInArray(scope.contextPacks[0].tiles, ["id"]).result).toBe(true)
+  });
+
+  it('paresPack test', function () {
+    scope.contextPacks = [];
+    scope.contextPacks[0] = {tileTags: [], tileBucket: []};
+    scope.contextPacks[0].tileBucket = [{word: "Word", tileTags: "Type",_id: "id"}, {word: "New", tileTags: "Type"}, {word: "Pack", tileTags: "Type"}, {word: "WordPack", tileTags: "Type"}];
+    scope.contextPacks[0].tileTags = [{tagName: "verb", _id: "id"}]
+    expect(scope.parsePack(scope.contextPacks[0])[0].packName).toBe("verb")
+  });
   //it('should attach a list of things to the scope', function () {
   //  $httpBackend.flush();
   //  expect(scope.awesomeThings.length).toBe(4);
