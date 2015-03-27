@@ -125,13 +125,14 @@ exports.updateBucket = function(req, res, next) {
   });
 };
 
+
 exports.postMe = function(req, res, next) {
   var userId = req.user._id;
 
   var word = req.body.words;
 
   User.findById(userId, function (err, user) {
-    user.words.push({"words": word});
+    user.words.push({"words": word}); // Use tileBucket for this -Lemmon
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);
@@ -143,7 +144,7 @@ exports.postMe = function(req, res, next) {
 exports.destroyMe = function(req, res, next) {
   var userId = req.user._id;
 
-  var word = req.body.words;
+  var word = req.body.words; // Use tileBucket for this too -Lemmon
   console.log("i got here")
 
     User.findById(userId, function (err, user) {
