@@ -114,6 +114,41 @@ exports.updateBucket = function(req, res, next) {
   });
 };
 
+exports.postMe = function(req, res, next) {
+  var userId = req.user._id;
+
+  var word = req.body.words;
+
+  User.findById(userId, function (err, user) {
+    user.words.push({"words": word});
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+
+exports.destroyMe = function(req, res, next) {
+  var userId = req.user._id;
+
+  var word = req.body.words;
+  console.log("i got here")
+
+    User.findById(userId, function (err, user) {
+      if(err) { return handleError(res, err); }
+      for(var n = 0; n < user.words.length; n++){
+        if(user.words[n] == word){
+          user.words.splice(0,n);
+        }
+      }
+      if(!user.words) { return res.send(404); }
+      user.words.remove(function(err) {
+        if(err) { return handleError(res, err); }
+        return res.send(204);
+      });
+    });
+  };
 /**
  * Get my info
  */
@@ -127,6 +162,7 @@ exports.me = function(req, res, next) {
     res.json(user);
   });
 };
+
 
 /**
  * Authentication callback

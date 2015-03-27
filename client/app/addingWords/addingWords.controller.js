@@ -50,7 +50,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.removeData = function(index){
-      $http.delete('/api/users/me/' + $scope.allWords[index]._id).success(function(){
+      $http.delete('/api/users/me' + $scope.allWords[index]._id).success(function(){
         $scope.getWords();
       });
     };
