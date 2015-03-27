@@ -61,7 +61,7 @@ angular.module('WordRiverApp')
 
 
     $scope.deletePack = function(index) {
-      $http.delete('/api/packs/' + $scope.contextPacks[index]._id);
+      $http.delete('/api/users/' + $scope.userId + "/updatePack");
       $scope.contextPacks.splice(index, 1);
     };
 

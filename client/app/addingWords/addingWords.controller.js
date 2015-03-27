@@ -2,6 +2,7 @@
 
 angular.module('WordRiverApp')
   .controller('AddingWordsCtrl', function ($rootScope, $scope, $http, socket) {
+    //$scope.currentUser = Auth.getUser();
     $scope.currentWords = [];
     $scope.allWords = [];
 
@@ -15,7 +16,7 @@ angular.module('WordRiverApp')
 
     $scope.getWords = function(){
       $http.get('/api/users/me').success(function(AllWordsDatabases) {
-        $scope.currentWords = AllWordsDatabases;
+        $scope.currentWords = AllWordsDatabases.words;
         $scope.allWords = $scope.currentWords;
       });
     };
@@ -23,14 +24,14 @@ angular.module('WordRiverApp')
     $scope.getWords();
 
     $scope.addWords = function(){
-      if($scope.wordField.length >= 1) {
-          <!--these words will be going into the individuals page, possibly the class words, and added to her program (words they can use) -->
-          $http.post('/api/users/me', {words: $scope.wordField}).success(function () {
-            $scope.getWords();
-            $scope.allWords.push({words: $scope.wordField});
-            $scope.wordField = "";
-          });
+      if($scope.wordField.length < 1) {
+        return;
       }
+          <!--these words will be going into the individuals page, possibly the class words, and added to her program (words they can use) -->
+      $http.post('/api/users/me', {words: $scope.wordField}).success(function () {
+        $scope.getWords();
+        $scope.wordField = "";
+      });
     };
 
     $scope.hasDuplicateValues = function() {
@@ -49,7 +50,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.removeData = function(index){
-      $http.delete('/api/users/me/' + $scope.allWords[index]._id).success(function(){
+      $http.delete('/api/users/me' + $scope.allWords[index]._id).success(function(){
         $scope.getWords();
       });
     };

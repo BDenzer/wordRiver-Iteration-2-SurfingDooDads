@@ -6,7 +6,7 @@ var crypto = require('crypto');
 
 var UserSchema = new Schema({
   name: String,
-  words: String,
+  words: [],
   email: { type: String, lowercase: true },
   role: {
     type: String,
@@ -35,7 +35,7 @@ var UserSchema = new Schema({
   ]
 });
 
-/**
+/** asdf@asdf
  * Virtuals
  */
 UserSchema
