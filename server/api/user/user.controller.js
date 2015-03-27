@@ -84,7 +84,6 @@ exports.updatePack = function(req, res, next) {
 
   var tagName = req.body.tagName;
   var packType = req.body.packType;
-  console.log("am i working")
 
   User.findById(userId, function (err, user) {
       user.tileTags.push({"tagName": tagName, "packType": packType});
@@ -92,6 +91,44 @@ exports.updatePack = function(req, res, next) {
         if (err) return validationError(res, err);
         res.send(200);
       });
+  });
+};
+
+exports.updateTile = function(req, res, next) {
+  var userId = req.user._id;
+
+  var word = req.body.word;
+  var packId = req.body.packId;
+
+  User.findById(userId, function (err, user) {
+    var found = false;
+    for(var i = 0; i < user.tileBucket.length; i++){
+      if(user.tileBucket[i].wordName == word){
+        found = true;
+        user.tileBucket[i].tileTags.push(packId);
+      }
+    }
+    if(!found){
+      user.tileBucket.push({wordName: word, tileTags: [packId]});
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+exports.deletePack = function(req, res, next) {
+  var userId = req.user._id;
+
+  var index = req.body.index;
+  User.findById(userId, function (err, user) {
+    user.tileTags.splice(index, 1);
+
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
   });
 };
 

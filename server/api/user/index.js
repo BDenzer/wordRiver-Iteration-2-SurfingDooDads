@@ -12,6 +12,8 @@ router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.put('/:id/updatePack', auth.isAuthenticated(), controller.updatePack);
+router.put('/:id/updateTile', auth.isAuthenticated(), controller.updateTile);
+router.put('/:id/deletePack', auth.isAuthenticated(), controller.deletePack);
 router.put('/:id/updateBucket', auth.isAuthenticated(), controller.updateBucket);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
