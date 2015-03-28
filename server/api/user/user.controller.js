@@ -1,6 +1,7 @@
 'use strict';
 
 var User = require('./user.model');
+var Student = require('../student/student.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
@@ -79,6 +80,16 @@ exports.changePassword = function(req, res, next) {
   });
 };
 
+exports.getUserStudents = function(user) {
+
+ //for(var i = 0; i < user.studentList.length; i++){
+   var studentId;
+   studentId = user.studentList[0];
+   return Student.findById(studentId).firstName;
+ //};
+ // return "Lizard";
+};
+
 exports.updatePack = function(req, res, next) {
   var userId = req.user._id;
 
@@ -114,6 +125,42 @@ exports.updateBucket = function(req, res, next) {
   });
 };
 
+
+exports.postMe = function(req, res, next) {
+  var userId = req.user._id;
+
+  var word = req.body.words;
+
+  User.findById(userId, function (err, user) {
+    user.words.push({"words": word}); // Use tileBucket for this -Lemmon
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+
+exports.destroyMe = function(req, res, next) {
+  var userId = req.user._id;
+
+  var word = req.body.words; // Use tileBucket for this too -Lemmon
+  console.log("i got here")
+
+    User.findById(userId, function (err, user) {
+      if(err) { return handleError(res, err); }
+      for(var n = 0; n < user.words.length; n++){
+        if(user.words[n] == word){
+          user.words.splice(0,n);
+        }
+      }
+      if(!user.words) { return res.send(404); }
+      user.words.remove(function(err) {
+        if(err) { return handleError(res, err); }
+        return res.send(204);
+      });
+    });
+  };
 /**
  * Get my info
  */
@@ -127,6 +174,7 @@ exports.me = function(req, res, next) {
     res.json(user);
   });
 };
+
 
 /**
  * Authentication callback
