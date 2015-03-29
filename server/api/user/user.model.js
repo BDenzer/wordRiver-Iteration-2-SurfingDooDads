@@ -24,7 +24,8 @@ var UserSchema = new Schema({
       wordName: String,
       //wordType: String,
       //description: String,
-      tileTags: [Schema.ObjectId]
+      tileTags: [Schema.ObjectId],
+      img: String
   }],
   studentList: [Schema.ObjectId],
   studentGroups: [

@@ -17,17 +17,8 @@ angular.module('WordRiverApp')
       });
     };
 
-    $scope.getStudentId();
 
-   /* function getById(arr, id) {
-      for (var i = 0; i < arr.length; i++) {
-        if (arr[i]._id === id) {
-          return arr[i];
-        }
-      }
-    }*/
-
-    $scope.getById = function(arr, id) {
+    function getById(arr, id) {
       for (var i = 0; i < arr.length; i++) {
         if (arr[i]._id === id) {
           return arr[i];
@@ -35,23 +26,26 @@ angular.module('WordRiverApp')
       }
     }
 
+   /* $scope.getById = function(arr, id) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i]._id === id) {
+          return arr[i];
+        }
+      }
+    };*/
+    $scope.getStudentId();
+
     $scope.getStudentsFromId = function() {
       $http.get('/api/students').success(function (student) {
         console.log(student);
-        /*for(var i = 0; i < $scope.studentsId.length; i++){
-           //$scope.students.push(student.findById($scope.studentsId[i]));
-          *//*for(var j = 0; j < students.length; j++){
-            if($scope.studentsId[i] == student[j]._id){
-              $scope.students.add(student[j]);
-            }
-          }*//*
-          $scope.students.push(_.findWhere(student,{_id: $scope.studentsId[i]}));
-        }*/
-        for(var i = 0; i < $scope.studentsId; i++){
-          $scope.students.push(getById(student, studentsId[i]));
+
+        console.log($scope.studentsId.length);
+        for(var i = 0; i < $scope.studentsId.length; i++){
+          $scope.students.push(getById(student, $scope.studentsId[i]));
+          console.log($scope.studentsId[i]);
+          console.log("test");
         }
 
-        console.log($scope.students);
       });
     };
 
