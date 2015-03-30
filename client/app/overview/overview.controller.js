@@ -95,15 +95,19 @@ angular.module('WordRiverApp')
     };
 
     $scope.deleteTile = function(pack, index) {
+      console.log(pack);
+      $http.put('/api/users/' + $scope.userId + "/deleteTile", {word: pack.tiles[index].wordName, packId: pack._id});
       pack.tiles.splice(index, 1);
-      $http.patch('/api/packs/' + pack._id,
-        {tiles: pack.tiles}
-      ).success(function() {
-          console.log("Patch completed!");
-          console.log($scope.contextPacks);
-        });
       //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
       //$http.delete('/api/packs/' + pack._id);
+    };
+
+    $scope.getPackIndex = function(pack){
+      for(var i = 0; i < $scope.contextPacks.length; i++){
+        if($scope.contextPacks[i]._id == pack._id){
+          return i;
+        }
+      }
     };
 
     $scope.toggleShowAdder = function() {

@@ -134,8 +134,39 @@ exports.deletePack = function(req, res, next) {
 
   var index = req.body.index;
   User.findById(userId, function (err, user) {
+    for(var i = 0; i < user.tileBucket.length; i++){
+      for(var j = 0; j < user.tileBucket[i].tileTags.length; j++){
+        if(user.tileBucket[i].tileTags[j] == user.tileTags[index]){
+          user.tileBucket[i].tileTags.splice(j, 1);
+        }
+      }
+    }
     user.tileTags.splice(index, 1);
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
 
+exports.deleteTile = function(req, res, next) {
+  var userId = req.user._id;
+
+  var word = req.body.word;
+  var packId = req.body.packId;
+  User.findById(userId, function (err, user) {
+    for(var i = 0; i < user.tileBucket.length; i++){
+      console.log(word == user.tileBucket[i].wordName);
+      if(word == user.tileBucket[i].wordName){
+        console.log(word);
+        for(var j = 0; j < user.tileBucket[i].tileTags.length; j++){
+          if(user.tileBucket[i].tileTags[j] == packId){
+            console.log(j);
+            user.tileBucket[i].tileTags.splice(j, 1);
+          }
+        }
+      }
+    }
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);
