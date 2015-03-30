@@ -8,7 +8,6 @@ angular.module('WordRiverApp')
 
     $scope.textField = "";
     $scope.tileField = "";
-    $scope.tileType= "";
 
     $scope.showPack = false;
     $scope.currentPack = null;
@@ -61,7 +60,8 @@ angular.module('WordRiverApp')
 
 
     $scope.deletePack = function(index) {
-      $http.delete('/api/users/' + $scope.userId + "/updatePack");
+      $http.put('/api/users/' + $scope.userId + "/deletePack", {index: index});
+
       $scope.contextPacks.splice(index, 1);
     };
 
@@ -82,15 +82,10 @@ angular.module('WordRiverApp')
     };
 
     $scope.addTile = function() {
-      if ($scope.tileField.length >= 1 && $scope.tileType.length > 0) {
-        $scope.currentPack.tiles.push({word: $scope.tileField, type: $scope.tileType});
+      if ($scope.tileField.length >= 1) {
+        $scope.currentPack.tiles.push({wordName: $scope.tileField});
 
-        $http.patch('/api/packs/' + $scope.currentPack._id,
-          {tiles: $scope.currentPack.tiles}
-        ).success(function(){
-            console.log("Patch completed!");
-            console.log($scope.contextPacks);
-          });
+        $http.put('/api/users/' + $scope.userId + "/updateTile", {word: $scope.tileField, packId: $scope.currentPack._id});
 
         //$http.post('/api/packs', {packName: $scope.currentPack.packName, tiles: $scope.currentPack.tiles});
         //$http.delete('/api/packs/' + $scope.currentPack._id);
@@ -100,15 +95,19 @@ angular.module('WordRiverApp')
     };
 
     $scope.deleteTile = function(pack, index) {
+      console.log(pack);
+      $http.put('/api/users/' + $scope.userId + "/deleteTile", {word: pack.tiles[index].wordName, packId: pack._id});
       pack.tiles.splice(index, 1);
-      $http.patch('/api/packs/' + pack._id,
-        {tiles: pack.tiles}
-      ).success(function() {
-          console.log("Patch completed!");
-          console.log($scope.contextPacks);
-        });
       //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
       //$http.delete('/api/packs/' + pack._id);
+    };
+
+    $scope.getPackIndex = function(pack){
+      for(var i = 0; i < $scope.contextPacks.length; i++){
+        if($scope.contextPacks[i]._id == pack._id){
+          return i;
+        }
+      }
     };
 
     $scope.toggleShowAdder = function() {

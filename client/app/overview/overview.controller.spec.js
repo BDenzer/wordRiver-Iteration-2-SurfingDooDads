@@ -34,14 +34,10 @@ describe('Controller: OverviewCtrl', function () {
     expect(scope.currentPack.tiles.length).toBe(0);
     scope.tileField = "Word";
     scope.addTile();
-    expect(scope.currentPack.tiles.length).toBe(0);
-    scope.tileType = "Type";
-    scope.addTile();
     expect(scope.currentPack.tiles.length).toBe(1);
     scope.addTile();
     expect(scope.currentPack.tiles.length).toBe(1);
-    expect(scope.currentPack.tiles[0].word).toBe("Word");
-    expect(scope.currentPack.tiles[0].type).toBe("Type");
+    expect(scope.currentPack.tiles[0].wordName).toBe("Word");
 
   });
 
@@ -135,6 +131,14 @@ describe('Controller: OverviewCtrl', function () {
     scope.contextPacks[0].tileBucket = [{word: "Word", tileTags: "Type",_id: "id"}, {word: "New", tileTags: "Type"}, {word: "Pack", tileTags: "Type"}, {word: "WordPack", tileTags: "Type"}];
     scope.contextPacks[0].tileTags = [{tagName: "verb", _id: "id"}]
     expect(scope.parsePack(scope.contextPacks[0])[0].packName).toBe("verb")
+  });
+
+  it('getPackIndex test', function () {
+    scope.contextPacks = [];
+    scope.contextPacks[0] = {_id: "1"};
+    scope.contextPacks[1] = {_id: "2"};
+    scope.contextPacks[2] = {_id: "3"};
+    expect(scope.getPackIndex({_id: "2"})).toBe(1);
   });
   //it('should attach a list of things to the scope', function () {
   //  $httpBackend.flush();
