@@ -111,7 +111,8 @@ User.find({}).remove(function() {
         //},
         {"wordName": "dinosaur",
           "tileTags": ["5511a5963b3e4c433b21f8e0"],
-          "_id" : "5511a62046b5a58e3b0271f4"
+          "_id" : "5511a62046b5a58e3b0271f4",
+          img: "http://upload.wikimedia.org/wikipedia/en/d/d7/Walking_with_Dinosaurs_Gorgosaurus.jpg"
         },
         {"wordName": "big",
           "tileTags": ["5511a5963b3e4c433b21f8e0"],
@@ -119,7 +120,8 @@ User.find({}).remove(function() {
         },
         {"wordName": "Steven Spielberg",
           "tileTags": ["5511a5963b3e4c433b21f8e0"],
-          "_id" : "5511a62046b5a58e3b0271f2"
+          "_id" : "5511a62046b5a58e3b0271f2",
+          img: "http://i3.mirror.co.uk/incoming/article1894860.ece/ALTERNATES/s615/Steven-Spielberg.jpg"
         }
       ],
 

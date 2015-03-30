@@ -12,21 +12,40 @@ angular.module('WordRiverApp')
       $http.get('/api/users/me').success(function(user) {
         //console.log(user);
         $scope.studentsId = user.studentList;
-        //console.log($scope.studentsId);
+        console.log($scope.studentsId);
         //console.log($scope.packs);
       });
     };
 
+
+    function getById(arr, id) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i]._id === id) {
+          return arr[i];
+        }
+      }
+    }
+
+   /* $scope.getById = function(arr, id) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i]._id === id) {
+          return arr[i];
+        }
+      }
+    };*/
     $scope.getStudentId();
 
-
     $scope.getStudentsFromId = function() {
-      $http.get('/api/students/:id').success(function (student) {
+      $http.get('/api/students').success(function (student) {
         console.log(student);
-        //for(var i = 0; i < $scope.studentsId.length; i++){
-        //  $scope.students.push(student.findById($scope.studentsId[i]));
-        //}
-        //console.log($scope.students);
+
+        console.log($scope.studentsId.length);
+        for(var i = 0; i < $scope.studentsId.length; i++){
+          $scope.students.push(getById(student, $scope.studentsId[i]));
+          console.log($scope.studentsId[i]);
+          console.log("test");
+        }
+
       });
     };
 
