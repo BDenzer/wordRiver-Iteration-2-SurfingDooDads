@@ -130,9 +130,15 @@ exports.postMe = function(req, res, next) {
 
 
 exports.destroyMe = function(req, res, next) {
+  console.log("i got here")
   var userId = req.user._id;
-
   var word = req.body.words;
+
+  for(var n = 0; n < user.words.length; n++){
+    if(user.words[n] == word){
+      user.words.splice(0,n);
+    }
+  }
   console.log("i got here")
 
     User.findById(userId, function (err, user) {
