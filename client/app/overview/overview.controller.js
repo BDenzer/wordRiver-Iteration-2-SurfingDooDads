@@ -17,6 +17,7 @@ angular.module('WordRiverApp')
       $http.get('/api/users/me').success(function (user) {
         $scope.contextPacks = $scope.parsePack(user);
         $scope.userId = user._id;
+        $scope.studentList = user.studentGroups;
         //socket.syncUpdates('pack', $scope.contextPacks);
       });
     };
@@ -39,24 +40,37 @@ angular.module('WordRiverApp')
       return data;
     };
 
-      $scope.idInArray = function(array, tileTags){
-        var result = false;
-        var indexes = [];
-        for(var i = 0; i < array.length; i++){
-          for(var j = 0; j < tileTags.length; j++)
-            if(array[i]._id == tileTags[j]){
-              result = true;
-              indexes.push(i);
-            }
-        }
-        return {result: result, index: indexes};
+    $scope.idInArray = function(array, tileTags){
+      var result = false;
+      var indexes = [];
+      for(var i = 0; i < array.length; i++){
+        for(var j = 0; j < tileTags.length; j++)
+          if(array[i]._id == tileTags[j]){
+            result = true;
+            indexes.push(i);
+          }
       }
+      return {result: result, index: indexes};
+    };
     $scope.getPacks();
 
     $http.get('/api/students').success(function(studentList) {
-      $scope.studentList = studentList;
+      $scope.studentList = $scope.getMyStudents(studentList);
       socket.syncUpdates('student', $scope.studentList);
     });
+
+    $scope.getMyStudents = function(studentList){
+      var newList = [];
+      var result = {};
+      for(var i = 0; i < studentList.length; i++){
+        for(var j = 0; j < $scope.studentList.length; j++){
+          result = $scope.inArray($scope.studentList[j].students, studentList[i]._id);
+          if(result.result){
+            $scope.studentList[j].students[result.index] = studentList[i];
+          }
+        }
+      }
+    };
 
 
     $scope.deletePack = function(index) {
@@ -118,4 +132,13 @@ angular.module('WordRiverApp')
       $scope.showPack = true;
       $scope.currentPack = pack;
     };
+
+    $scope.inArray = function(array, toFind){
+      for(var i = 0; i < array.length; i++){
+        if(array[i] == toFind){
+          return {result: true, index: i};
+        }
+      }
+      return {result: false, index: -1};
+    }
   });

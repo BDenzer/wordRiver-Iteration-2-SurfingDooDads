@@ -140,6 +140,22 @@ describe('Controller: OverviewCtrl', function () {
     scope.contextPacks[2] = {_id: "3"};
     expect(scope.getPackIndex({_id: "2"})).toBe(1);
   });
+
+  it('inArray test', function () {
+    scope.contextPacks = [];
+    scope.contextPacks[0] = "1";
+    scope.contextPacks[1] = "2";
+    scope.contextPacks[2] = "3";
+    expect(scope.inArray(scope.contextPacks, "2").index).toBe(1);
+    expect(scope.inArray(scope.contextPacks, "1").index).toBe(0);
+    expect(scope.inArray(scope.contextPacks, "3").index).toBe(2);
+    expect(scope.inArray(scope.contextPacks, "4").index).toBe(-1);
+    expect(scope.inArray(scope.contextPacks, "2").result).toBe(true);
+    expect(scope.inArray(scope.contextPacks, "1").result).toBe(true);
+    expect(scope.inArray(scope.contextPacks, "3").result).toBe(true);
+    expect(scope.inArray(scope.contextPacks, "4").result).toBe(false);
+
+  });
   //it('should attach a list of things to the scope', function () {
   //  $httpBackend.flush();
   //  expect(scope.awesomeThings.length).toBe(4);
