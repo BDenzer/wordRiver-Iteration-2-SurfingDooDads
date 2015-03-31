@@ -18,9 +18,8 @@ angular.module('WordRiverApp')
     $scope.getTileBucket();
 
     $scope.displayImage = function(tile) {
-        $scope.image = tile.img;
-      document.getElementById("Image").innerHTML = "<u>" + "<img src=\"" + tile.img +"\"" + "alt=\"This tile does not have an image\" align=\"middle\" height=\"450\" width=\"450\">" + "</u><br/>";
-    }
+        document.getElementById("Image").innerHTML = "<u>" + "<img src=\"" + tile.img +"\"" + "alt=\"This tile does not have an image\" align=\"middle\" height=\"450\" width=\"450\">" + "</u><br/>";
+    };
 
     function getById(arr, id) {
       for (var i = 0; i < arr.length; i++) {
@@ -33,10 +32,25 @@ angular.module('WordRiverApp')
     $scope.displayContext = function(tile) {
       for(var i = 0; i < tile.tileTags.length; i++){
         if(getById($scope.tileTags, tile.tileTags[i]).tagType == "Context"){
-          return  getById($scope.tileTags, tile.tileTags[i]).tagName;
+          return  getById($scope.tileTags, tile.tileTags[i]).tagName + ", ";
         }
       }
+    };
 
+    $scope.displayWordType = function(tile) {
+      for(var i = 0; i < tile.tileTags.length; i++){
+        if(getById($scope.tileTags, tile.tileTags[i]).tagType == "WordType"){
+          return  getById($scope.tileTags, tile.tileTags[i]).tagName + ", ";
+        }
+      }
+    };
+
+    $scope.displayOtherTags = function(tile) {
+      for(var i = 0; i < tile.tileTags.length; i++){
+        if(getById($scope.tileTags, tile.tileTags[i]).tagType == "OtherTags"){
+          return  getById($scope.tileTags, tile.tileTags[i]).tagName + ", ";
+        }
+      }
     }
   });
 
