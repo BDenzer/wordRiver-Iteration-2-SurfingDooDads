@@ -19,15 +19,19 @@
 
 <div class="container-fluid">
   <div class="row">
-    <table class="col-xs-4 sortable">
+    <table class="col-xs-4 " style="overflow: auto">
       <tr>
         <th>Words</th>
-        <th>Tags/Context</th>
+        <th>Context</th>
+        <th>Word Types</th>
+        <th>Tags</th>
       </tr>
       <tr data-ng-repeat="tile in tileBucket">
         <!--<td data-ng-bind="tile.wordName"></td>-->
         <td> <button ng-click="displayImage(tile)">{{tile.wordName}}</button> </td>
         <td data-ng-bind="displayContext(tile)"></td>
+        <td data-ng-bind="displayWordType(tile)"></td>
+        <td data-ng-bind="displayOtherTags(tile)"></td>
       </tr>
     </table>
     <!--<h1>Words</h1>
