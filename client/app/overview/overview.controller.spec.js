@@ -156,6 +156,18 @@ describe('Controller: OverviewCtrl', function () {
     expect(scope.inArray(scope.contextPacks, "4").result).toBe(false);
 
   });
+
+  it('getMyGroups test', function () {
+    scope.studentGroups = [{students: []}];
+    scope.studentGroups[0].students[0] = "1";
+    scope.studentGroups[0].students[1] = "2";
+    scope.studentGroups[0].students[2] = "3";
+    var students = [{_id: "1", firstName:"bob"}, {_id: "3", firstName: "jim"}];
+    scope.getMyGroups(students);
+    expect(scope.studentGroups[0].students[0].firstName).toBe("bob");
+    expect(scope.studentGroups[0].students[1].firstName).toBe("jim");
+
+  });
   //it('should attach a list of things to the scope', function () {
   //  $httpBackend.flush();
   //  expect(scope.awesomeThings.length).toBe(4);

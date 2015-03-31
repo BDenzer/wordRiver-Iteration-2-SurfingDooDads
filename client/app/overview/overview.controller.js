@@ -3,6 +3,7 @@
 angular.module('WordRiverApp')
   .controller('OverviewCtrl', function ($scope, $http, socket) {
     $scope.studentList = [];
+    $scope.studentGroups = [];
     $scope.userId = "";
     $scope.contextPacks = [];
 
@@ -13,25 +14,28 @@ angular.module('WordRiverApp')
     $scope.currentPack = null;
     $scope.showTileAdder = false;
 
-    $scope.getPacks = function() {
+    $scope.getPacks = function () {
       $http.get('/api/users/me').success(function (user) {
         $scope.contextPacks = $scope.parsePack(user);
         $scope.userId = user._id;
-        $scope.studentList = user.studentGroups;
+        $scope.studentGroups = user.studentGroups;
+        $scope.studentList = user.studentList;
         //socket.syncUpdates('pack', $scope.contextPacks);
+      }).success(function(){
+        $scope.getStudents();
       });
     };
 
-    $scope.parsePack = function(contextPack){
+    $scope.parsePack = function (contextPack) {
       var data = [];
-      for(var i = 0; i < contextPack.tileTags.length; i++){
+      for (var i = 0; i < contextPack.tileTags.length; i++) {
         data.push({packName: contextPack.tileTags[i].tagName, tiles: [], _id: contextPack.tileTags[i]._id});
       }
 
-      for(var j = 0; j < contextPack.tileBucket.length; j++){
-        var ids = $scope.idInArray(data ,contextPack.tileBucket[j].tileTags);
-        if(ids.result){
-          for(var k = 0; k < ids.index.length; k++){
+      for (var j = 0; j < contextPack.tileBucket.length; j++) {
+        var ids = $scope.idInArray(data, contextPack.tileBucket[j].tileTags);
+        if (ids.result) {
+          for (var k = 0; k < ids.index.length; k++) {
             data[ids.index[k]].tiles.push(contextPack.tileBucket[j]);
           }
         }
@@ -40,37 +44,58 @@ angular.module('WordRiverApp')
       return data;
     };
 
-    $scope.idInArray = function(array, tileTags){
+    $scope.idInArray = function (array, tileTags) {
       var result = false;
       var indexes = [];
-      for(var i = 0; i < array.length; i++){
-        for(var j = 0; j < tileTags.length; j++)
-          if(array[i]._id == tileTags[j]){
-            result = true;
-            indexes.push(i);
-          }
+      for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < tileTags.length; j++)
+        if (array[i]._id == tileTags[j]) {
+          result = true;
+          indexes.push(i);
+        }
       }
       return {result: result, index: indexes};
     };
     $scope.getPacks();
 
-    $http.get('/api/students').success(function(studentList) {
-      $scope.studentList = $scope.getMyStudents(studentList);
-      socket.syncUpdates('student', $scope.studentList);
-    });
+    $scope.getStudents = function () {
+      $http.get('/api/students').success(function (studentList) {
+          $scope.getMyGroups(studentList);
+          var result = $scope.idInArray(studentList, $scope.studentList);
+          $scope.studentList.splice(0, $scope.studentList.length);
+          for (var i = 0; i < result.index.length; i++) {
+            $scope.studentList.push(studentList[result.index[i]]);
+          }
+          //socket.syncUpdates('student', $scope.studentList);
 
-    $scope.getMyStudents = function(studentList){
-      var newList = [];
+        });
+    };
+
+    $scope.getMyGroups = function(studentList){
+      var students = [];
       var result = {};
-      for(var i = 0; i < studentList.length; i++){
-        for(var j = 0; j < $scope.studentList.length; j++){
-          result = $scope.inArray($scope.studentList[j].students, studentList[i]._id);
+      for(var i = 0; i < $scope.studentGroups.length; i++){
+        for(var j = 0; j < studentList.length; j++){
+          result = $scope.inArray($scope.studentGroups[i].students, studentList[j]._id);
           if(result.result){
-            $scope.studentList[j].students[result.index] = studentList[i];
+            students.push(studentList[j]);
           }
         }
+        $scope.studentGroups[i].students = students;
       }
     };
+
+    $scope.arrayCleanUp = function(array){
+      var cleanArray = [];
+      for(var i = 0; i < array.length; i++){
+        if(array[i]){
+          cleanArray.push(array[i]);
+        }
+      }
+
+      return cleanArray;
+    };
+
 
 
     $scope.deletePack = function(index) {

@@ -11,9 +11,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-4">
-            <h1 class="page-header">Students:</h1>
-            <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="studentGroup in studentList">
-                <li><a href="#" tooltip="{{studentGroup.groupName}}">{{studentGroup.groupName}}</a></li>
+          <h1 class="page-header">Students:</h1>
+          <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="student in studentList">
+            <li><a href="#" tooltip="{{student.firstName}}">{{student.firstName}} {{student.lastName}}</a></li>
+          </ul>
+            <h1 class="page-header">Groups:</h1>
+            <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="group in studentGroups">
+                <li><a href="#" tooltip="{{group.groupName}}">{{group.groupName}}</a></li>
             </ul>
         </div>
 
