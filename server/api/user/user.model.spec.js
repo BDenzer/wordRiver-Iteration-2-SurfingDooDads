@@ -4,6 +4,7 @@ var should = require('should');
 var app = require('../../app');
 var User = require('./user.model');
 var Student = require('../student/student.model');
+var request = require('supertest');
 
 var user = new User({
   provider: 'local',
@@ -58,15 +59,11 @@ var student5 = new Student({
 describe('User Model on empty database', function() {
   before(function(done) {
     // Clear users before testing
-    User.remove().exec().then(function() {
-      done();
-    });
+    User.remove(done);
   });
 
   afterEach(function(done) {
-    User.remove().exec().then(function() {
-      done();
-    });
+    User.remove(done);
   });
 
   it('should begin with no users', function(done) {
@@ -101,6 +98,11 @@ describe('User Model on empty database', function() {
   it("should not authenticate user if password is invalid", function() {
     return user.authenticate('blah').should.not.be.true;
   });
+
+  it("should add a user with create()", function() {
+    request(app)
+      .post()
+  })
 });
 
 describe('User Model with populated database', function() {
@@ -110,7 +112,7 @@ describe('User Model with populated database', function() {
       if (err) console.log("Error in User.create!");
       User.findOne({name: "Maryann Emerson"}, function(err, user) {
         if (err) console.log("Error in adding!");
-        console.log("Added to database: " + user.name);
+        //console.log("Added to database: " + user.name);
         done();
       });
     });
