@@ -171,6 +171,33 @@ describe('Controller: OverviewCtrl', function () {
     expect(scope.studentGroups[0].students[1].firstName).toBe("jim");
 
   });
+
+  it('getGroupData test', function() {
+    scope.contextPacks = [];
+    scope.contextPacks[0] = {_id: "1", highlighted: ""};
+    scope.contextPacks[1] = {_id: "2", highlighted: ""};
+    scope.contextPacks[2] = {_id: "3", highlighted: ""};
+    scope.studentGroups = [{students: [], contextPacks: [], highlighted: ""}];
+    scope.studentGroups[0].students = [];
+    scope.studentGroups[0].students[0] = {_id: "0", highlighted: ""};
+    scope.studentGroups[0].students[1] = {_id: "1", highlighted: ""};
+    scope.studentGroups[0].contextPacks = [];
+    scope.studentGroups[0].contextPacks[0] = "2";
+    scope.studentGroups[0].contextPacks[1] = "3";
+    scope.studentList = [];
+    scope.studentList[0] = {_id: "0", highlighted: ""};
+    scope.studentList[1] = {_id: "1", highlighted: ""};
+    scope.studentList[2] = {_id: "2", highlighted: ""};
+    scope.getGroupData(0);
+    expect(scope.studentList[0].highlighted).toBe("highlighted");
+    expect(scope.studentList[1].highlighted).toBe("highlighted");
+    expect(scope.studentList[2].highlighted).toBe("");
+    expect(scope.contextPacks[0].highlighted).toBe("");
+    expect(scope.contextPacks[1].highlighted).toBe("highlighted");
+    expect(scope.contextPacks[2].highlighted).toBe("highlighted");
+    expect(scope.studentGroups[0].highlighted).toBe("highlighted");
+
+  });
   //it('should attach a list of things to the scope', function () {
   //  $httpBackend.flush();
   //  expect(scope.awesomeThings.length).toBe(4);
