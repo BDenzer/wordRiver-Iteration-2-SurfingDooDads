@@ -162,6 +162,9 @@ describe('Controller: OverviewCtrl', function () {
     scope.studentGroups[0].students[0] = "1";
     scope.studentGroups[0].students[1] = "2";
     scope.studentGroups[0].students[2] = "3";
+    for(var i=3; i < 10000000; i++){
+      scope.studentGroups[0].students[i] = i;
+    }
     var students = [{_id: "1", firstName:"bob"}, {_id: "3", firstName: "jim"}];
     scope.getMyGroups(students);
     expect(scope.studentGroups[0].students[0].firstName).toBe("bob");
