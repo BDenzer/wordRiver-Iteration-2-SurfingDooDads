@@ -3,8 +3,14 @@
 angular.module('WordRiverApp')
   .controller('AddingWordsCtrl', function ($rootScope, $scope, $http, socket) {
     //$scope.currentUser = Auth.getUser();
-    $scope.currentWords = [];
-    $scope.allWords = [];
+    $scope.studentList = [];
+    $scope.studentGroups = [];
+    $scope.userId = "";
+    $scope.contextPacks = [];
+    $scope.currentStudent = null;
+    $scope.currentStudentWords = null;
+    $scope.tileBucket = [];
+
 
     $scope.checkedWords=[];
     $scope.checkedStudents=[];
@@ -14,14 +20,99 @@ angular.module('WordRiverApp')
     //beforeEach(module('wordRiverTeamFtlApp'));
     //beforeEach(module('socketMock'));
 
-    $scope.getWords = function(){
-      $http.get('/api/users/me').success(function(AllWordsDatabases) {
-        $scope.currentWords = AllWordsDatabases.words;
-        $scope.allWords = $scope.currentWords;
+
+    $scope.getPacks = function () {
+      $http.get('/api/users/me').success(function (user) {
+        $scope.contextPacks = $scope.parsePack(user);
+        $scope.userId = user._id;
+        $scope.studentGroups = user.studentGroups;
+        $scope.studentList = user.studentList;
+        $scope.tileBucket = user.tileBucket;
+        //socket.syncUpdates('pack', $scope.contextPacks);
+      }).success(function(){
+        $scope.getStudents();
+      });
+    };
+    $scope.getPacks();
+
+    $scope.parsePack = function (contextPack) {
+      var data = [];
+      for (var i = 0; i < contextPack.tileTags.length; i++) {
+        data.push({packName: contextPack.tileTags[i].tagName, tiles: [], _id: contextPack.tileTags[i]._id});
+      }
+
+      for (var j = 0; j < contextPack.tileBucket.length; j++) {
+        var ids = $scope.idInArray(data, contextPack.tileBucket[j].tileTags);
+        if (ids.result) {
+          for (var k = 0; k < ids.index.length; k++) {
+            data[ids.index[k]].tiles.push(contextPack.tileBucket[j]);
+          }
+        }
+      }
+      //console.log(data[0].tiles[0].wordName);
+      return data;
+    };
+
+    $scope.idInArray = function (array, tileTags) {
+      var result = false;
+      var indexes = [];
+      for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < tileTags.length; j++)
+          if (array[i]._id == tileTags[j]) {
+            result = true;
+            indexes.push(i);
+          }
+      }
+      return {result: result, index: indexes};
+    };
+
+    $scope.getStudents = function () {
+      $http.get('/api/students').success(function (studentList) {
+        $scope.getMyGroups(studentList);
+        var result = $scope.idInArray(studentList, $scope.studentList);
+        $scope.studentList.splice(0, $scope.studentList.length);
+        for (var i = 0; i < result.index.length; i++) {
+          $scope.studentList.push(studentList[result.index[i]]);
+        }
+        //socket.syncUpdates('student', $scope.studentList);
+
       });
     };
 
-    $scope.getWords();
+    $scope.inArray = function(array, toFind){
+      for(var i = 0; i < array.length; i++){
+        if(array[i] == toFind){
+          return {result: true, index: i};
+        }
+      }
+      return {result: false, index: -1};
+    }
+
+    $scope.getMyGroups = function(studentList){
+      var students = [];
+      var result = {};
+      for(var i = 0; i < $scope.studentGroups.length; i++){
+        for(var j = 0; j < studentList.length; j++){
+          result = $scope.inArray($scope.studentGroups[i].students, studentList[j]._id);
+          if(result.result){
+            students.push(studentList[j]);
+          }
+        }
+        $scope.studentGroups[i].students = students;
+      }
+    };
+    $scope.idInArray = function (array, tileTags) {
+      var result = false;
+      var indexes = [];
+      for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < tileTags.length; j++)
+          if (array[i]._id == tileTags[j]) {
+            result = true;
+            indexes.push(i);
+          }
+      }
+      return {result: result, index: indexes};
+    };
 
     $scope.addWords = function(){
       if($scope.wordField.length < 1) {
@@ -33,6 +124,7 @@ angular.module('WordRiverApp')
         $scope.wordField = "";
       });
     };
+
 
     $scope.hasDuplicateValues = function() {
       var input = $scope.wordField;
@@ -150,6 +242,23 @@ angular.module('WordRiverApp')
     $scope.makeCurrentStudent = function(student){
       $rootScope.currentStudent = student;
     };
+
+    $scope.toWords = function(tileBucket){
+      var words = [];
+      var a = $scope.idInArray($scope.tileBucket, tileBucket);
+      if(a.result){
+        for(var i = 0; i < a.index.length; i++){
+          words.push($scope.tileBucket[a.index[i]].wordName);
+        }
+      }
+      return words;
+    };
+
+    $scope.studentInfo = function(student){
+      $scope.currentStudent = student.firstName + " " + student.lastName;
+      $scope.currentStudentWords = $scope.toWords(student.tileBucket);
+    }
+
 
   //});
 

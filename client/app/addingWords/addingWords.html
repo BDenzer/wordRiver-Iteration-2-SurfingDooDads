@@ -35,21 +35,22 @@
 
 
 <!--<div class="container">-->
-  <div class="row">
-    <table>
-      <tr>
-        <th>Grade</th>
-        <th>Name</th>
-      </tr>
-      <tr>
-        <td> <div class="col-lg-12" ng-repeat="class in classList"><label><input type="checkbox" name="checkbox" value="value"></label> <li class="btn btn-default" ng-click="changeFilter(class)">{{class}}</li></div></td>
-        <td> <div class="col-lg-12" ng-repeat="class in classList | filter: filterText" ng-show="true"><div class="col-lg-12" ng-repeat="person in studentList | filter: class |orderBy: 'student'" ng-show="true"><label><input type="checkbox" value="studentChecked"  ng-click="allCheckedStudents(person)"><a class="btn btn-default" ng-click="makeCurrentStudent(person)" href="/profile"> {{person.student}}</a></label></div></div>
-        </td>
-      </tr>
-    </table>
+  <div class="col-xs-4">
+    <h1 class="page-header">Students:</h1>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="student in studentList">
+        <a href="" ng-click="studentInfo(student)">{{student.firstName}}{{student.lastName}}</a>
+    </ul>
   </div>
-  <form ng-submit="wordsBeingSent()">
-  <input type="submit" value="Add word(s) to student(s)">
+
+
+  <div class="col-xs-4" ng-show="true">
+    <h1 class="page-header">{{currentStudent}}:</h1>
+    <ul class="list-group">
+      <li class="list-group-item" ng-repeat="words in currentStudentWords">
+        <a href="" ng-click="">{{words}}</a></li>
+    </ul>
+  </div>
 
 
   </form>
