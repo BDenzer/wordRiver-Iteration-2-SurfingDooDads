@@ -16,8 +16,8 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   tileTags: [{
-    tagName: String,
-    tagType: String
+    tagName: String, //Name of tag
+    tagType: String //Context/General/LetterCombo
   }],
   tileBucket: [{
       //_id: Schema.ObjectId,
