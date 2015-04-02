@@ -39,6 +39,19 @@ a.ng-scopeng-binding:visited{
   padding: 50px 0;
 }
 
+.highlighted{
+  background: yellow;
+}
+a.highlighted:hover{
+  background: yellow !important;
+}
+a.highlighted:focus{
+  background: yellow !important;
+}
+a.highlighted:active{
+  background: yellow !important;
+}
+
 /*.selected {*/
   /*background-color: green !important;*/
 /*}*/

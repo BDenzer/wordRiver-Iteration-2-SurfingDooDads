@@ -134,7 +134,7 @@ User.find({}).remove(function() {
       "studentGroups": [
         {
           "groupName": "Classroom",
-          contextPacks: [""],
+          contextPacks: ["5511a5963b3e4c433b21f8e1", "5511a5963b3e4c433b21f8e0"],
           "students": [
             "551072458e97142166a71951",
            // {id: 2},

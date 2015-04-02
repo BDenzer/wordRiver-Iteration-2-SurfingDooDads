@@ -31,6 +31,7 @@ var UserSchema = new Schema({
   studentGroups: [
     {
       groupName: String,
+      contextPacks: [Schema.ObjectId],
       students: [Schema.ObjectId]
     }
   ]

@@ -20,6 +20,7 @@ angular.module('WordRiverApp')
         $scope.userId = user._id;
         $scope.studentGroups = user.studentGroups;
         $scope.studentList = user.studentList;
+
         //socket.syncUpdates('pack', $scope.contextPacks);
       }).success(function(){
         $scope.getStudents();
@@ -29,7 +30,7 @@ angular.module('WordRiverApp')
     $scope.parsePack = function (contextPack) {
       var data = [];
       for (var i = 0; i < contextPack.tileTags.length; i++) {
-        data.push({packName: contextPack.tileTags[i].tagName, tiles: [], _id: contextPack.tileTags[i]._id});
+        data.push({packName: contextPack.tileTags[i].tagName, tiles: [], _id: contextPack.tileTags[i]._id, highlighted: ""});
       }
 
       for (var j = 0; j < contextPack.tileBucket.length; j++) {
@@ -44,14 +45,49 @@ angular.module('WordRiverApp')
       return data;
     };
 
+    $scope.getGroupData = function(index) {
+      var result = {};
+      var result2 = {};
+      result = $scope.idInArray($scope.contextPacks, $scope.studentGroups[index].contextPacks);
+      for(var k = 0; k < $scope.contextPacks.length; k++){
+        $scope.contextPacks[k].highlighted =  "";
+      }
+      for(var l = 0; l < $scope.studentList.length; l++){
+        $scope.studentList[l].highlighted =  "";
+      }
+      for(var m = 0; m < $scope.studentGroups.length; m++){
+        $scope.studentGroups[m].highlighted =  "";
+      }
+      $scope.studentGroups[index].highlighted = "highlighted";
+      if (result.result) {
+        for (var i = 0; i < result.index.length; i++) {
+          $scope.contextPacks[result.index[i]].highlighted =  "highlighted";
+        }
+      }
+      console.log($scope.studentList[0]._id);
+      var groupIds = [];
+      for(var i = 0; i < $scope.studentGroups[index].students.length; i++){
+        groupIds.push($scope.studentGroups[index].students[i]._id);
+      }
+      result2 = $scope.idInArray($scope.studentList, groupIds);
+      if (result2.result) {
+        for (var j = 0; j < result2.index.length; j++) {
+          $scope.studentList[result2.index[j]].highlighted = "highlighted";
+        }
+      }
+
+    };
+
     $scope.idInArray = function (array, tileTags) {
       var result = false;
       var indexes = [];
       for (var i = 0; i < array.length; i++) {
-        for (var j = 0; j < tileTags.length; j++)
-        if (array[i]._id == tileTags[j]) {
-          result = true;
-          indexes.push(i);
+        for (var j = 0; j < tileTags.length; j++) {
+          //console.log(array[i]._id + " " + tileTags[j]);
+          if (array[i]._id == tileTags[j]) {
+            result = true;
+            indexes.push(i);
+          }
         }
       }
       return {result: result, index: indexes};
@@ -60,6 +96,7 @@ angular.module('WordRiverApp')
 
     $scope.getStudents = function () {
       $http.get('/api/students').success(function (studentList) {
+        console.log(studentList);
           $scope.getMyGroups(studentList);
           var result = $scope.idInArray(studentList, $scope.studentList);
           $scope.studentList.splice(0, $scope.studentList.length);
@@ -75,9 +112,12 @@ angular.module('WordRiverApp')
       var students = [];
       var result = {};
       for(var i = 0; i < $scope.studentGroups.length; i++){
+        $scope.studentGroups[i].highlighted = "";
+        students = [];
         for(var j = 0; j < studentList.length; j++){
           result = $scope.inArray($scope.studentGroups[i].students, studentList[j]._id);
           if(result.result){
+            studentList[j].highlighted = "";
             students.push(studentList[j]);
           }
         }
