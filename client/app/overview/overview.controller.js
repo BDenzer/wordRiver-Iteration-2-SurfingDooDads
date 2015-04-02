@@ -41,7 +41,7 @@ angular.module('WordRiverApp')
           }
         }
       }
-      //console.log(data[0].tiles[0].wordName);
+      //console.log(data[0].tile[0].wordName);
       return data;
     };
 
@@ -83,7 +83,7 @@ angular.module('WordRiverApp')
       var indexes = [];
       for (var i = 0; i < array.length; i++) {
         for (var j = 0; j < tileTags.length; j++) {
-          //console.log(array[i]._id + " " + tileTags[j]);
+          //console.log(array[i]._id + " " + tileTag[j]);
           if (array[i]._id == tileTags[j]) {
             result = true;
             indexes.push(i);
@@ -166,7 +166,7 @@ angular.module('WordRiverApp')
 
         $http.put('/api/users/' + $scope.userId + "/updateTile", {word: $scope.tileField, packId: $scope.currentPack._id});
 
-        //$http.post('/api/packs', {packName: $scope.currentPack.packName, tiles: $scope.currentPack.tiles});
+        //$http.post('/api/packs', {packName: $scope.currentPack.packName, tile: $scope.currentPack.tile});
         //$http.delete('/api/packs/' + $scope.currentPack._id);
         $scope.tileField = "";
 
@@ -177,7 +177,7 @@ angular.module('WordRiverApp')
       console.log(pack);
       $http.put('/api/users/' + $scope.userId + "/deleteTile", {word: pack.tiles[index].wordName, packId: pack._id});
       pack.tiles.splice(index, 1);
-      //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
+      //$http.post('/api/packs', {packName: pack.packName, tile: pack.tile});
       //$http.delete('/api/packs/' + pack._id);
     };
 

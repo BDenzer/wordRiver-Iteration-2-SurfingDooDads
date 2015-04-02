@@ -228,7 +228,7 @@ User.find({}).remove(function() {
             "wordColor": "blue"}
       ],
 
-      "studentGroups": [
+      "studentGroup": [
         {
           "groupName": "aliquip",
           "students": [
@@ -408,7 +408,7 @@ User.find({}).remove(function() {
           "wordType": "verb",
           "wordColor": "blue"}
       ],
-      "studentGroups": [
+      "studentGroup": [
         {
           "groupName": "cillum",
           "students": [
@@ -452,7 +452,7 @@ User.find({}).remove(function() {
           "wordType": "verb",
           "wordColor": "blue"}
       ],
-      "studentGroups": [
+      "studentGroup": [
         {
           "groupName": "nostrud",
           "students": [
@@ -496,7 +496,7 @@ User.find({}).remove(function() {
           "wordType": "verb",
           "wordColor": "blue"}
       ],
-      "studentGroups": [
+      "studentGroup": [
         {
           "groupName": "occaecat",
           "students": [
@@ -546,7 +546,7 @@ User.find({}).remove(function() {
           "wordType": "verb",
           "wordColor": "blue"}
       ],
-      "studentGroups": [
+      "studentGroup": [
         {
           "groupName": "id",
           "students": [
@@ -590,7 +590,7 @@ User.find({}).remove(function() {
           "wordType": "verb",
           "wordColor": "blue"}
       ],
-      "studentGroups": [
+      "studentGroup": [
         {
           "groupName": "Lorem",
           "students": [
@@ -661,7 +661,7 @@ Student.find({}).remove(function() {
  wordType: 'noun',
  wordColor: 'blue'
  }],
- studentGroups: [
+ studentGroup: [
  {
  groupName: '{{lorem(1, "words")}}',
  students: [{

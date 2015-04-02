@@ -6,7 +6,7 @@ var crypto = require('crypto');
 
 var UserSchema = new Schema({
   name: String,
-  words: [],
+  //words: [],
   email: { type: String, lowercase: true },
   role: {
     type: String,
@@ -15,26 +15,10 @@ var UserSchema = new Schema({
   hashedPassword: String,
   provider: String,
   salt: String,
-  tileTags: [{
-    tagName: String,
-    tagType: String
-  }],
-  tileBucket: [{
-      //_id: Schema.ObjectId,
-      wordName: String,
-      //wordType: String,
-      //description: String,
-      tileTags: [Schema.ObjectId],
-      img: String
-  }],
+  tileTags: [Schema.ObjectId],
+  tileBucket: [Schema.ObjectId],
   studentList: [Schema.ObjectId],
-  studentGroups: [
-    {
-      groupName: String,
-      contextPacks: [Schema.ObjectId],
-      students: [Schema.ObjectId]
-    }
-  ]
+  studentGroups: [Schema.ObjectId]
 });
 
 /** asdf@asdf
