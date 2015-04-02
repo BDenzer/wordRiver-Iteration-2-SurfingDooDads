@@ -6,10 +6,10 @@ var mongoose = require('mongoose'),
 var StudentSchema = new Schema({
   firstName: String,
   lastName: String,
-  tileBucket: [Schema.ObjectId],
+  tileBucket: [Schema.ObjectId]
   //"gender": String,
   //"grade": String,
-  "_id" : Schema.ObjectId
+  //"_id" : Schema.ObjectId
 
 });
 
