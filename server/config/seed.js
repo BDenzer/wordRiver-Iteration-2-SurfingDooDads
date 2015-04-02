@@ -610,7 +610,12 @@ Student.find({}).remove(function() {
     {
       "firstName": "Lizard",
       "lastName": "Pratt",
-      "_id" : "551072458e97142166a71951"
+      "_id" : "551072458e97142166a71951",
+      "tileBucket" : [
+        "5511a62046b5a58e3b0271f4",
+        "5511a62046b5a58e3b0271f3",
+        "5511a62046b5a58e3b0271f5"
+      ]
     },
     {
       "firstName": "Battle",
