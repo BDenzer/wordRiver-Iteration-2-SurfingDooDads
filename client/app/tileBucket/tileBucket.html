@@ -28,6 +28,7 @@
       </tr>
       <tr data-ng-repeat="tile in tileBucket">
         <!--<td data-ng-bind="tile.wordName"></td>-->
+       <!--<td data-ng-bind="generateButton(tile)" <p id="Button">>{{tile.wordName}} </td>-->
         <td> <button ng-click="displayImage(tile)">{{tile.wordName}}</button> </td>
         <td data-ng-bind="displayContext(tile)"></td>
         <td data-ng-bind="displayWordType(tile)"></td>

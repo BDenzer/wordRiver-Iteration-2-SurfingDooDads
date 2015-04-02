@@ -142,6 +142,15 @@ describe('User Model with populated database', function() {
     });
   });
 
+  it('should be able to add student group', function(done) {
+    User.find({}, function(err, users) {
+      console.log("Here's our second Teacher");
+      console.log(users[0]);
+      users[0].addStudentGroup()
+      done();
+    });
+  });
+
   //it('should return all of a teachers students', function(done) {
   //  User.find({}, function(err, users) {
   //    console.log("HERES OUR TEACH");

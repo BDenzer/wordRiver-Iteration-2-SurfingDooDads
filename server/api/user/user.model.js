@@ -31,6 +31,7 @@ var UserSchema = new Schema({
   studentGroups: [
     {
       groupName: String,
+      contextPacks:[Schema.ObjectId],
       students: [Schema.ObjectId]
     }
   ]
@@ -97,7 +98,15 @@ UserSchema
       if(err) throw err;
       if(user) {
         if(self.id === user.id) return respond(true);
-        return respond(false);
+        return respond(false);var StudentSchema = new Schema({
+  firstName: String,
+  lastName: String,
+  tileBucket: [Schema.ObjectId],
+  //"gender": String,
+  //"grade": String,
+  "_id" : Schema.ObjectId
+
+});
       }
       respond(true);
     });
