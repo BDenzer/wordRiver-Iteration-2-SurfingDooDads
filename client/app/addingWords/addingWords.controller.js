@@ -10,6 +10,7 @@ angular.module('WordRiverApp')
     $scope.currentStudent = null;
     $scope.currentStudentWords = null;
     $scope.tileBucket = [];
+    $scope.tileTags = [];
 
 
     $scope.checkedWords=[];
@@ -17,6 +18,10 @@ angular.module('WordRiverApp')
 
     $scope.wordField = "";
 
+    $scope.wordToAdd1 = null;
+    $scope.wordToAdd2 = null;
+
+    $scope.student1 = null;
     //beforeEach(module('wordRiverTeamFtlApp'));
     //beforeEach(module('socketMock'));
 
@@ -28,6 +33,7 @@ angular.module('WordRiverApp')
         $scope.studentGroups = user.studentGroups;
         $scope.studentList = user.studentList;
         $scope.tileBucket = user.tileBucket;
+        $scope.tileTags = user.tileTags;
         //socket.syncUpdates('pack', $scope.contextPacks);
       }).success(function(){
         $scope.getStudents();
@@ -101,18 +107,6 @@ angular.module('WordRiverApp')
         $scope.studentGroups[i].students = students;
       }
     };
-    $scope.idInArray = function (array, tileTags) {
-      var result = false;
-      var indexes = [];
-      for (var i = 0; i < array.length; i++) {
-        for (var j = 0; j < tileTags.length; j++)
-          if (array[i]._id == tileTags[j]) {
-            result = true;
-            indexes.push(i);
-          }
-      }
-      return {result: result, index: indexes};
-    };
 
     $scope.addWords = function(){
       if($scope.wordField.length < 1) {
@@ -128,7 +122,7 @@ angular.module('WordRiverApp')
 
     $scope.hasDuplicateValues = function() {
       var input = $scope.wordField;
-      var array = $scope.allWords;
+      var array = $scope.tileBucket;
       for (var i = 0; i < array.length; i++) {
         var arrayValue = array[i].words;
         if (input === arrayValue){
@@ -194,7 +188,7 @@ angular.module('WordRiverApp')
     //
     //      })
     //    }
-    //  };
+    //  };length
     //
     //
     //};
@@ -257,8 +251,24 @@ angular.module('WordRiverApp')
     $scope.studentInfo = function(student){
       $scope.currentStudent = student.firstName + " " + student.lastName;
       $scope.currentStudentWords = $scope.toWords(student.tileBucket);
+      $scope.student1 = student;
+
     }
 
+    $scope.wordToAdd = function(word){
+      $scope.wordToAdd1 = word.wordName;
+      $scope.wordToAdd2 = word;
+    }
+
+    $scope.addWord = function(){
+      for(var n = 0; n < $scope.student1.tileBucket.length; n++){
+        if ($scope.wordToAdd2._id == $scope.student1.tileBucket[n]){
+          alert("This word already exists within " + $scope.currentStudent + ".");
+          return;
+        }
+      }
+      $scope.student1.tileBucket.push($scope.wordToAdd2._id);
+    }
 
   //});
 

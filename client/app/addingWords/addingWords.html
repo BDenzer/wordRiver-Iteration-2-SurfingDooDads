@@ -16,22 +16,28 @@
       <form ng-submit="hasDuplicateValues()">
         <input ng-model="wordField" type="text" size="50" placeholder="add a new item to the list!">
         <input type="submit" value="Add" class="btn btn-primary">
+        <div>Word to Add: {{wordToAdd1}} Student to Add to: {{currentStudent}}</div>
 
         <!--<span class="floatRight">Items in this list: {{itemsInList()}}</span> -->
       </form>
     </li>
+
     <!--</ul>-->
   <!--<ul>-->
     <!--<form name="addingWordsForm" action="checkboxes.asp" method="post">-->
       <!--<span><input type = "button" name ="CheckAll" value="Check All"></span>-->
-    <li class="list-group-item" ng-repeat="test in allWords"><label><input type="checkbox" value="isChecked" ng-click="allCheckedWords(test)"> {{test.words}}</label> <span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>
+    <li class="list-group-item" ng-repeat="tile in tileBucket"><label><input type="button" ng-checked="" ng-click="wordToAdd(tile)"> {{tile.wordName}}</label> <span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>
 
       <!--<li class="list-group-item" ng-repeat="test in data">{{test.weight}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>-->
     <!--</form>-->
   </ul>
   <!--</div>-->
 <!--</div>-->
-
+  <div class="col-xs-4">
+    <button class="button" ng-click="addWord()"> Add word to Student</button>
+  </div>
+  <br>
+  <br>
 
 
 <!--<div class="container">-->
