@@ -228,6 +228,27 @@ angular.module('WordRiverApp')
       $scope.textField="";
     };
 
+    $scope.addGroup = function () {
+      if ($scope.textField.length >= 1) {
+        $http.put('/api/users/' + $scope.userId + "/updateGroup", {groupName: $scope.textField});
+        $scope.contextPacks.push({packName: $scope.textField, tiles: []});
+      }
+      $scope.textField="";
+    };
+
+    $scope.addStudent = function() {
+      if ($scope.tileField.length >= 1) {
+        $scope.currentPack.tiles.push({wordName: $scope.tileField});
+
+        $http.put('/api/users/' + $scope.userId + "/updateTile", {word: $scope.tileField, packId: $scope.currentPack._id});
+
+        //$http.post('/api/packs', {packName: $scope.currentPack.packName, tiles: $scope.currentPack.tiles});
+        //$http.delete('/api/packs/' + $scope.currentPack._id);
+        $scope.tileField = "";
+
+      }
+    };
+
     $scope.addTile = function() {
       if ($scope.tileField.length >= 1) {
         $scope.currentPack.tiles.push({wordName: $scope.tileField});

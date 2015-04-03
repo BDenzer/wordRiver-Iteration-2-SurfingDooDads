@@ -105,6 +105,21 @@ exports.updatePack = function(req, res, next) {
   });
 };
 
+exports.updateGroup = function(req, res, next) {
+  var userId = req.user._id;
+
+  var groupName = req.body.groupName;
+  //var packType = req.body.packType;
+
+  User.findById(userId, function (err, user) {
+    user.tileTags.push({"groupName": groupName});
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.updateTile = function(req, res, next) {
   var userId = req.user._id;
 
