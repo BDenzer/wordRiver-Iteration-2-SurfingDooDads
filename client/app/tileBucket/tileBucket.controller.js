@@ -17,6 +17,15 @@ angular.module('WordRiverApp')
     };
     $scope.getTileBucket();
 
+    /*$scope.generateButton = function(tile) {
+      if(tile.img != null){
+        document.getElementById("Button").innerhtml =  "<button ng-click="/"displayImage(tile)/"> + "{{tile.wordName}}" + "</button> ";
+    } else{
+        document.getElementById("Button").innerhtml =  "data-ng-bind=" + "tile.wordName";
+      }
+    };*/
+
+
     $scope.displayImage = function(tile) {
         document.getElementById("Image").innerHTML = "<u>" + "<img src=\"" + tile.img +"\"" + "alt=\"This tile does not have an image\" align=\"middle\" height=\"450\" width=\"450\">" + "</u><br/>";
     };
@@ -40,7 +49,7 @@ angular.module('WordRiverApp')
     $scope.displayWordType = function(tile) {
       for(var i = 0; i < tile.tileTags.length; i++){
         if(getById($scope.tileTags, tile.tileTags[i]).tagType == "WordType"){
-          return  getById($scope.tileTags, tile.tileTags[i]).tagName + ", ";
+          return  getById($scope.tileTags, tile.tileTags[i]).tagName;
         }
       }
     };

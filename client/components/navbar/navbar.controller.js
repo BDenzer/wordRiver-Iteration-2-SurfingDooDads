@@ -11,6 +11,9 @@ angular.module('WordRiverApp')
     },{
       'title': 'Adding words',
       'link':'/addingWords'
+    },{
+      'title': 'Make new groups',
+      'link':'/dashboard'
     }];
 
     $scope.isCollapsed = true;

@@ -1,14 +1,14 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<table>
-  <!--<th>Group Name</th>-->
-  <!--<tr ng-repeat="student in students"><td>{{student.groupName}}</td></tr>-->
+<!--<table>
+  &lt;!&ndash;<th>Group Name</th>&ndash;&gt;
+  &lt;!&ndash;<tr ng-repeat="student in students"><td>{{student.groupName}}</td></tr>&ndash;&gt;
 
   <table id="customers">
     <tr>
       <th>Group Name</th>
       <th>Display Student List</th>
     </tr>
-    <tr data-ng-repeat="group in students">
+    <tr data-ng-repeat="group in groups">
       <td data-ng-bind="group.groupName"></td>
       <td><a href="#" data-ng-click="showdetails(group)">Display</a></td>
 
@@ -19,4 +19,71 @@
 
     </p>
   </h2>
-</table>
+</table>-->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-4">
+      <h1 class="page-header">Students:</h1>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="student in studentList">
+        <li><a href="#" tooltip="{{student.firstName}}" class="{{student.highlighted}}">{{student.firstName}} {{student.lastName}}</a></li>
+      </ul>
+      <h1 class="page-header">Groups:</h1>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="group in studentGroups">
+        <li ng-click="getGroupData($index)"><a href="#" tooltip="{{group.groupName}}" class="{{group.highlighted}}">{{group.groupName}}</a></li>
+      </ul>
+    </div>
+
+    <!--<form class="thing-form">-->
+    <!--<label>Syncs in realtime across clients</label>-->
+    <!--<p class="input-group">-->
+    <!--<input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newThing">-->
+    <!--<span class="input-group-btn">-->
+    <!--<button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>-->
+    <!--</span>-->
+    <!--</p>-->
+    <!--</form>-->
+
+    <div class="col-xs-4">
+      <h1 class="page-header">Groups:</h1>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <form ng-submit="addGroup()">
+            <input ng-model="textField" type="text" size="15" placeholder="add a group!">
+            <input type="submit" value="submit" class="btn btn-primary">
+          </form>
+        </li>
+        <li class="list-group-item" ng-repeat="group in studentGroups">
+          <a href="" class="{{pack.highlighted}}" ng-click="groupInfo(group)">{{group.groupName}}</a>
+          <button type="button" class="close" title="Delete Context Pack" data-toggle="tooltip" ng-click="deleteGroup($index)">&times;</button>
+      </ul>
+    </div>
+
+    <div class="col-xs-4">
+      <div ng-show="showGroup">
+
+        <h1 class="page-header">Students in {{currentGroup.groupName}}:</h1>
+        <ul class="list-group" >
+          <li class="list-group-item">
+            <form ng-submit="addStudent()">
+              <select ng-model="studentDropDown"><option ng-repeat= "student in studentsNotInGroup" value="{{student._id}}" > {{student.firstName}} {{student.lastName}}</option> </select>
+              <!--<input ng-model="tileField" type="text" size="15" placeholder="add a card!">-->
+              <input type="submit" value="submit" class="btn btn-primary">
+            </form>
+          </li>
+          <li ng-repeat="student in currentGroup.students" class="list-group-item">{{student.firstName}}  {{student.lastName}}<button type="button" class="close" ng-click="deleteStudent(currentGroup, $index)">&times;</button></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>Angular Fullstack v2.0.13 |
+      <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
+      <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+  </div>
+</footer>
