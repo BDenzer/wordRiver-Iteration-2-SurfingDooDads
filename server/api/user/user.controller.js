@@ -112,7 +112,7 @@ exports.updateGroup = function(req, res, next) {
   //var packType = req.body.packType;
 
   User.findById(userId, function (err, user) {
-    user.tileTags.push({"groupName": groupName});
+    user.studentGroups.push({"groupName": groupName});
     user.save(function(err) {
       if (err) return validationError(res, err);
       res.send(200);
