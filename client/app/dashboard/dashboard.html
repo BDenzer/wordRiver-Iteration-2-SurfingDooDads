@@ -55,7 +55,7 @@
         </li>
         <li class="list-group-item" ng-repeat="group in studentGroups">
           <a href="" class="{{pack.highlighted}}" ng-click="groupInfo(group)">{{group.groupName}}</a>
-          <button type="button" class="close" title="Delete Context Pack" data-toggle="tooltip" ng-click="deletePack($index)">&times;</button>
+          <button type="button" class="close" title="Delete Context Pack" data-toggle="tooltip" ng-click="deleteGroup($index)">&times;</button>
       </ul>
     </div>
 
@@ -65,12 +65,13 @@
         <h1 class="page-header">Students in {{currentGroup.groupName}}:</h1>
         <ul class="list-group" >
           <li class="list-group-item">
-            <form ng-submit="addTile()">
-              <input ng-model="tileField" type="text" size="15" placeholder="add a card!">
+            <form ng-submit="addStudent()">
+              <select ng-model="studentDropDown"><option ng-repeat= "student in studentsNotInGroup" value="{{student._id}}" > {{student.firstName}} {{student.lastName}}</option> </select>
+              <!--<input ng-model="tileField" type="text" size="15" placeholder="add a card!">-->
               <input type="submit" value="submit" class="btn btn-primary">
             </form>
           </li>
-          <li ng-repeat="student in currentGroup.students" class="list-group-item">{{student.firstName}}  {{student.lastName}}<button type="button" class="close" ng-click="deleteTile(currentGroup, $index)">&times;</button></li>
+          <li ng-repeat="student in currentGroup.students" class="list-group-item">{{student.firstName}}  {{student.lastName}}<button type="button" class="close" ng-click="deleteStudent(currentGroup, $index)">&times;</button></li>
         </ul>
       </div>
 

@@ -120,6 +120,22 @@ exports.updateGroup = function(req, res, next) {
   });
 };
 
+exports.updateStudents = function(req, res, next) {
+  var userId = req.user._id;
+
+  var groupIndex = req.body.groupIndex;
+  var student = req.body.student;
+  //var packType = req.body.packType;
+
+  User.findById(userId, function (err, user) {
+    user.studentGroups[groupIndex].students.push(student);
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.updateTile = function(req, res, next) {
   var userId = req.user._id;
 
@@ -164,6 +180,19 @@ exports.deletePack = function(req, res, next) {
   });
 };
 
+exports.deleteGroup = function(req, res, next) {
+  var userId = req.user._id;
+
+  var index = req.body.index;
+  User.findById(userId, function (err, user) {
+    user.studentGroups.splice(index, 1);
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.addStudentGroup = function(req, res, next) {
   var userId = req.user._id;
 
@@ -191,6 +220,26 @@ exports.deleteTile = function(req, res, next) {
             user.tileBucket[i].tileTags.splice(j, 1);
           }
         }
+      }
+    }
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+exports.deleteStudent = function(req, res, next) {
+  var userId = req.user._id;
+
+  var studentId = req.body.studentId;
+  var groupId = req.body.groupId;
+  User.findById(userId, function (err, user) {
+    for(var i = 0; i < user.studentGroups[groupId].students.length; i++){
+      console.log(studentId + " + " + user.studentGroups[groupId].students[i])
+      if(studentId == user.studentGroups[groupId].students[i]){
+        user.studentGroups[groupId].students.splice(i,1);
+        console.log("test")
       }
     }
     user.save(function(err) {

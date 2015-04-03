@@ -65,12 +65,13 @@ angular.module('WordRiverApp')
       document.getElementById("studentList").innerHTML = "<u>" + group.groupName  + "</u><br/>" + words;
     }*/
 
-
+    $scope.studentsNotInGroup = [];
     $scope.studentList = [];
     $scope.studentGroups = [];
     $scope.userId = "";
     $scope.contextPacks = [];
 
+    $scope.studentDropDown = "";
     $scope.textField = "";
     $scope.tileField = "";
 
@@ -212,6 +213,12 @@ angular.module('WordRiverApp')
       $scope.contextPacks.splice(index, 1);
     };
 
+    $scope.deleteGroup = function(index) {
+      $http.put('/api/users/' + $scope.userId + "/deleteGroup", {index: index});
+
+      $scope.studentGroups.splice(index, 1);
+    };
+
     //$scope.deleteTile = function(pack,index) {
     //  return pack.splice(index, 1);
     //};
@@ -237,15 +244,18 @@ angular.module('WordRiverApp')
     };
 
     $scope.addStudent = function() {
-      if ($scope.tileField.length >= 1) {
-        $scope.currentGroup.students.push({wordName: $scope.tileField});
+      if ($scope.inDropDown($scope.studentList, $scope.studentDropDown)) {
+        for(var i =0; i < $scope.studentList.length; i++){
+          if($scope.studentList[i]._id == $scope.studentDropDown){
+            $scope.currentGroup.students.push($scope.studentList[i]);
+          }
+        }
 
-        $http.put('/api/users/' + $scope.userId + "/updateGroup", {word: $scope.tileField, packId: $scope.currentPack._id});
-
+        $http.put('/api/users/' + $scope.userId + "/updateStudents", {groupIndex: $scope.getGroupIndex($scope.currentGroup), student: $scope.studentDropDown});
+        $scope.notInGroup();
+        $scope.studentDropDown = "";
         //$http.post('/api/packs', {packName: $scope.currentPack.packName, tiles: $scope.currentPack.tiles});
         //$http.delete('/api/packs/' + $scope.currentPack._id);
-        $scope.tileField = "";
-
       }
     };
 
@@ -270,9 +280,18 @@ angular.module('WordRiverApp')
       //$http.delete('/api/packs/' + pack._id);
     };
 
-    $scope.getPackIndex = function(pack){
-      for(var i = 0; i < $scope.contextPacks.length; i++){
-        if($scope.contextPacks[i]._id == pack._id){
+    $scope.deleteStudent = function(group, index) {
+      console.log(group);
+      $http.put('/api/users/' + $scope.userId + "/deleteStudent", {studentId: group.students[index]._id, groupId: index});
+      group.students.splice(index, 1);
+      $scope.notInGroup();
+      //$http.post('/api/packs', {packName: pack.packName, tiles: pack.tiles});
+      //$http.delete('/api/packs/' + pack._id);
+    };
+
+    $scope.getGroupIndex = function(pack){
+      for(var i = 0; i < $scope.studentGroups.length; i++){
+        if($scope.studentGroups[i]._id == pack._id){
           return i;
         }
       }
@@ -290,6 +309,7 @@ angular.module('WordRiverApp')
     $scope.groupInfo = function(group){
       $scope.showGroup = true;
       $scope.currentGroup = group;
+      $scope.notInGroup();
     }
 
     $scope.inArray = function(array, toFind){
@@ -299,6 +319,30 @@ angular.module('WordRiverApp')
         }
       }
       return {result: false, index: -1};
+    }
+
+    $scope.inDropDown = function(array, toFind){
+      for(var i = 0; i < array.length; i++){
+        if(array[i]._id == toFind){
+          return true;
+        }
+      }
+      return false;
+    }
+
+    $scope.notInGroup = function() {
+
+      $scope.studentsNotInGroup = $scope.studentList.slice(0);
+      for(var i = 0; i < $scope.currentGroup.students.length; i++){
+        for(var j =0; j < $scope.studentList.length; j++) {
+          if($scope.currentGroup.students[i]._id == $scope.studentList[j]._id){
+            $scope.studentsNotInGroup[j] = undefined;
+
+          }
+        }
+      }
+
+      $scope.studentsNotInGroup = $scope.arrayCleanUp($scope.studentsNotInGroup);
     }
 
 
