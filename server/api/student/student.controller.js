@@ -65,6 +65,18 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.updateBucket = function(req, res){
+  var wordId = req.body.wordId;
+  console.log(wordId);
+  Student.findById(req.params.id, function(err, student){
+    student.tileBucket.push(wordId);
+    student.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }
