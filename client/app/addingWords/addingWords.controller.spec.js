@@ -25,18 +25,15 @@ describe('Controller: AddingWordsCtrl', function () {
     expect(true).toBe(true);
   });
 
-  //it('addTile test', function () {
-  //  scope.currentPack = {tiles: []};
-  //  scope.addTile();
-  //  expect(scope.currentPack.tiles.length).toBe(0);
-  //  scope.tileField = "Word";
-  //  scope.addTile();
-  //  expect(scope.currentPack.tiles.length).toBe(1);
-  //  scope.addTile();
-  //  expect(scope.currentPack.tiles.length).toBe(1);
-  //  expect(scope.currentPack.tiles[0].wordName).toBe("Word");
-  //
-  //});
+  it('new addWord test', function () {
+    scope.wordToAdd2 = {_id: "2", wordName: "cat"};
+    scope.student1 = {_id: "0", tileBucket: []};
+    scope.student1.tileBucket = [];
+    scope.currentStudentWords = [];
+    scope.addWord();
+    expect(scope.student1.tileBucket[0]).toBe("2");
+    expect(scope.currentStudentWords[0]).toBe("cat");
+  });
 
   //it('deleteTile test', function () {
   //  scope.contextPacks = [];
@@ -56,7 +53,7 @@ describe('Controller: AddingWordsCtrl', function () {
   //
   //
   //});
-
+  //
   //it('toggleShowAdder test', function () {
   //  scope.showTileAdder = false;
   //  scope.toggleShowAdder();
@@ -65,7 +62,7 @@ describe('Controller: AddingWordsCtrl', function () {
   //  expect(scope.showTileAdder).toBe(false);
   //
   //});
-
+  //
   //it('packInfo test', function () {
   //  scope.contextPacks = [];
   //  scope.contextPacks[0] = {packName: "test", tiles: []};
@@ -76,7 +73,7 @@ describe('Controller: AddingWordsCtrl', function () {
   //  expect(scope.currentPack.packName).toBe("test");
   //
   //});
-
+  //
   //it('addContextPacks test', function () {
   //  scope.contextPacks = [];
   //  scope.addContextPacks();
@@ -89,7 +86,7 @@ describe('Controller: AddingWordsCtrl', function () {
   //  expect(scope.contextPacks[0].packName).toBe("Pack");
   //
   //});
-
+  //
   //it('deletePack test', function () {
   //  scope.contextPacks = [];
   //  scope.textField = "Pack";
@@ -129,7 +126,7 @@ describe('Controller: AddingWordsCtrl', function () {
     scope.contextPacks[0].tileTags = [{tagName: "verb", _id: "id"}]
     expect(scope.parsePack(scope.contextPacks[0])[0].packName).toBe("verb")
   });
-
+  //
   //it('getPackIndex test', function () {
   //  scope.contextPacks = [];
   //  scope.contextPacks[0] = {_id: "1"};
@@ -168,31 +165,4 @@ describe('Controller: AddingWordsCtrl', function () {
     expect(scope.studentGroups[0].students[1].firstName).toBe("jim");
 
   });
-
-  //it('getGroupData test', function() {
-  //  scope.contextPacks = [];
-  //  scope.contextPacks[0] = {_id: "1", highlighted: ""};
-  //  scope.contextPacks[1] = {_id: "2", highlighted: ""};
-  //  scope.contextPacks[2] = {_id: "3", highlighted: ""};
-  //  scope.studentGroups = [{students: [], contextPacks: [], highlighted: ""}];
-  //  scope.studentGroups[0].students = [];
-  //  scope.studentGroups[0].students[0] = {_id: "0", highlighted: ""};
-  //  scope.studentGroups[0].students[1] = {_id: "1", highlighted: ""};
-  //  scope.studentGroups[0].contextPacks = [];
-  //  scope.studentGroups[0].contextPacks[0] = "2";
-  //  scope.studentGroups[0].contextPacks[1] = "3";
-  //  scope.studentList = [];
-  //  scope.studentList[0] = {_id: "0", highlighted: ""};
-  //  scope.studentList[1] = {_id: "1", highlighted: ""};
-  //  scope.studentList[2] = {_id: "2", highlighted: ""};
-  //  scope.getGroupData(0);
-  //  expect(scope.studentList[0].highlighted).toBe("highlighted");
-  //  expect(scope.studentList[1].highlighted).toBe("highlighted");
-  //  expect(scope.studentList[2].highlighted).toBe("");
-  //  expect(scope.contextPacks[0].highlighted).toBe("");
-  //  expect(scope.contextPacks[1].highlighted).toBe("highlighted");
-  //  expect(scope.contextPacks[2].highlighted).toBe("highlighted");
-  //  expect(scope.studentGroups[0].highlighted).toBe("highlighted");
-  //
-  //});
 });
