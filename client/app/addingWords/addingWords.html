@@ -6,65 +6,73 @@
   </div>
 </header>
 
-<div class="container">
-  <a class="btn btn-default" href="/main"> Back to Home</a>
-  <hr>
-  <!--these words will be going into the individuals page, possibly the class words, and added to her program (words they can use) -->
-  <!--<div class="container">-->
-  <ul class="list-group">
-    <li class="list-group-item">
-      <form ng-submit="addWordsToList()">
-        <input ng-model="wordField" type="text" size="50" placeholder="add a new item to the list!">
-        <input type="submit" value="Add" class="btn btn-primary">
-        <div>Word to Add: {{wordToAdd1}} Student to Add to: {{currentStudent}}</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-4">
+      <!--these words will be going into the individuals page, possibly the class words, and added to her program (words they can use) -->
+      <!--<div class="container">-->
+      <h1 class="page-header">Word List</h1>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <form ng-submit="addWordsToList()">
+            <input ng-model="wordField" type="text" size="50" placeholder="add a new item to the list!">
+            <input type="submit" value="Add" class="btn btn-primary">
 
-        <!--<span class="floatRight">Items in this list: {{itemsInList()}}</span> -->
+            <!--<span class="floatRight">Items in this list: {{itemsInList()}}</span> -->
+          </form>
+        </li>
+
+        <!--</ul>-->
+      <!--<ul>-->
+        <!--<form name="addingWordsForm" action="checkboxes.asp" method="post">-->
+          <!--<span><input type = "button" name ="CheckAll" value="Check All"></span>-->
+        <div class="scrollable">
+          <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="tile in tileBucket">
+            <li class=""><input type="button" ng-click="wordToAdd(tile)"> {{tile.wordName}} <!--<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span>--></li>
+          </ul>
+        </div>
+        <div>
+          <div><h3>Word to Add: {{wordToAdd1}}</h3></div>
+          <div><h3>Student to Add to: {{currentStudent}}</h3></div>
+          <br>
+          <div class="col-xs-4">
+            <button class="button" ng-click="addWord()"> Add word to Student</button>
+          </div>
+        </div>
+
+          <!--<li class="list-group-item" ng-repeat="test in data">{{test.weight}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>-->
+        <!--</form>-->
+      </ul>
+      </div>
+      <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="container">-->
+      <div class="col-xs-4">
+        <h1 class="page-header">Students:</h1>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="student in studentList">
+            <a href="" ng-click="studentInfo(student)">{{student.firstName}} {{student.lastName}}</a>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="col-xs-4" ng-show="true">
+        <h1 class="page-header">{{currentStudent}}:</h1>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="words in currentStudentWords">
+            <a>{{words}}</a><button type="button" class="close"  ng-click="removeStudentWord($index)">&times;</button>
+          </li>
+        </ul>
+      </div>
+
+
       </form>
-    </li>
-
-    <!--</ul>-->
-  <!--<ul>-->
-    <!--<form name="addingWordsForm" action="checkboxes.asp" method="post">-->
-      <!--<span><input type = "button" name ="CheckAll" value="Check All"></span>-->
-    <div class="scrollable">
-      <li class="list-group-item" ng-repeat="tile in tileBucket"><label><input type="button" ng-checked="" ng-click="wordToAdd(tile)"> {{tile.wordName}}</label> <!--<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span>--></li>
-    </div>
-
-      <!--<li class="list-group-item" ng-repeat="test in data">{{test.weight}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>-->
-    <!--</form>-->
-  </ul>
-  <!--</div>-->
-<!--</div>-->
-  <div class="col-xs-4">
-    <button class="button" ng-click="addWord()"> Add word to Student</button>
+    <!--</div>-->
   </div>
-  <br>
-  <br>
-
-
-<!--<div class="container">-->
-  <div class="col-xs-4">
-    <h1 class="page-header">Students:</h1>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="student in studentList">
-        <a href="" ng-click="studentInfo(student)">{{student.firstName}} {{student.lastName}}</a>
-    </ul>
-  </div>
-
-
-  <div class="col-xs-4" ng-show="true">
-    <h1 class="page-header">{{currentStudent}}:</h1>
-    <ul class="list-group">
-      <li class="list-group-item" ng-repeat="words in currentStudentWords">
-        <a href="" ng-click="">{{words}}</a><span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeStudentWord($index)"></span></li>
-    </ul>
-  </div>
-
-
-  </form>
-<!--</div>-->
 </div>
-
 <!-- make check boxes push information, be able to maybe check and uncheck all (we can do this last), put tables by each other, make names seen right away, not just groups, and move garbage cans over-->
 
 
