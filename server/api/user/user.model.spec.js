@@ -4,6 +4,7 @@ var should = require('should');
 var app = require('../../app');
 var User = require('./user.model');
 var Student = require('../student/student.model');
+var request = require('supertest');
 
 var user = new User({
   provider: 'local',
@@ -106,21 +107,16 @@ describe('User Model on empty database', function() {
 describe('User Model with populated database', function() {
   beforeEach(function(done) {
     User.create(teacher, function(err, user) {
-      console.log("Adding user to database");
-      if (err) console.log("Error in User.create!");
-      User.findOne({name: "Maryann Emerson"}, function(err, user) {
-        if (err) console.log("Error in adding!");
-        console.log("Added to database: " + user.name);
-        done();
-      });
+      if (err) {console.log("Error in User.create!");}
+      done();
     });
   });
 
   afterEach(function(done) {
     User.remove({}, function(err, something) {
-      console.log("Clearing database");
+      //console.log("Clearing database");
       User.find({}, function(err, users) {
-        console.log("Things in database: " + users.length);
+        //console.log("Things in database: " + users.length);
         done();
       });
     });
@@ -128,28 +124,30 @@ describe('User Model with populated database', function() {
 
   it('should be one teacher in database', function(done) {
     User.find({}, function(err, users) {
-      console.log("Here's our first Teacher");
-      console.log(users[0]);
+      //console.log("Here's our first Teacher");
+      //console.log(users[0]);
       done();
     });
   });
 
   it('should be one teacher in database again', function(done) {
     User.find({}, function(err, users) {
-      console.log("Here's our second Teacher");
-      console.log(users[0]);
+      //console.log("Here's our second Teacher");
+      //console.log(users[0]);
       done();
     });
   });
 
-  it('should be able to add student group', function(done) {
-    User.find({}, function(err, users) {
-      console.log("Here's our second Teacher");
-      console.log(users[0]);
-      users[0].addStudentGroup()
-      done();
-    });
-  });
+  //it('should be able to add student group', function(done) {
+  //  request(app)
+  //    .
+  //  User.find({}, function(err, users) {
+  //    //console.log("Here's our second Teacher");
+  //    //console.log(users[0]);
+  //    users[0].addStudentGroup();
+  //    done();
+  //  });
+  //});
 
   //it('should return all of a teachers students', function(done) {
   //  User.find({}, function(err, users) {
