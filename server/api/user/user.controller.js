@@ -207,16 +207,16 @@ exports.deleteGroup = function(req, res, next) {
   });
 };
 
-exports.addStudentGroup = function(req, res, next) {
-  var userId = req.user._id;
-
-  var group = req.body.group;
-  User.findById(userId, function (err, user) {
-    user.studentGroups.push(group);
-    user.markModified('studentGroups');
-    user.save().exec();
-  });
-}
+//exports.addStudentGroup = function(req, res, next) {
+//  var userId = req.user._id;
+//
+//  var group = req.body.group;
+//  User.findById(userId, function (err, user) {
+//    user.studentGroups.push(group);
+//    user.markModified('studentGroups');
+//    user.save().exec();
+//  });
+//}
 
 exports.deleteTile = function(req, res, next) {
   var userId = req.user._id;
