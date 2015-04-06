@@ -207,7 +207,7 @@ User.find({}).remove(function() {
               wordType: "noun",
               wordColor: "green"},
             {wordName: "Bird",
-              wordType: "noun",
+              wordType: "noun",students
               wordColor: "green"},
             {wordName: "Lizard",
               wordType: "noun",
@@ -254,7 +254,7 @@ User.find({}).remove(function() {
         },
         {
           "groupName": "anim",
-          "students": [
+          "students": [students
             {
               "name": "Cochran"
             },
@@ -332,7 +332,7 @@ User.find({}).remove(function() {
             },
             {
               "name": "Leila"
-            },
+            },students
             {
               "name": "Lacy"
             },
