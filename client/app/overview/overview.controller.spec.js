@@ -125,7 +125,7 @@ describe('Controller: OverviewCtrl', function () {
     expect(scope.idInArray(scope.contextPacks[0].tiles, ["id"]).result).toBe(true)
   });
 
-  it('paresPack test', function () {
+  it('parsePack test', function () {
     scope.contextPacks = [];
     scope.contextPacks[0] = {tileTags: [], tileBucket: []};
     scope.contextPacks[0].tileBucket = [{word: "Word", tileTags: "Type",_id: "id"}, {word: "New", tileTags: "Type"}, {word: "Pack", tileTags: "Type"}, {word: "WordPack", tileTags: "Type"}];
