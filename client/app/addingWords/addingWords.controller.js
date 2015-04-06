@@ -267,14 +267,40 @@ angular.module('WordRiverApp')
           return;
         }
       }
-      $scope.submitWord();
-    };
-
-    $scope.submitWord = function () {
       $scope.student1.tileBucket.push($scope.wordToAdd2._id);
-      $http.put('/api/student/' + $scope.student1._id + "/updateBucket", {wordId: $scope.wordToAdd2._id});
+      $scope.currentStudentWords.push($scope.wordToAdd2.wordName);
+      $scope.submit();
     };
 
+    $scope.submit = function(){
+      $http.put('/api/students/' + $scope.student1._id + "/updateBucket", {wordId: $scope.wordToAdd2._id});
+    };
+
+    $scope.addWordsToList = function(){
+      if(0 < $scope.wordField.length){
+        if(!$scope.inBucket($scope.wordField)){
+          $http.put('/api/users/' + $scope.userId + "/updateBucket", {word: $scope.wordField});
+          $scope.tileBucket.push({wordName: $scope.wordField});
+          $scope.wordField = "";
+        }
+      }
+    };
+
+    $scope.inBucket = function(word){
+      for(var i = 0; i < $scope.tileBucket.length; i++){
+        if($scope.tileBucket[i].wordName == word){
+          return true;
+        }
+      }
+      return false;
+    };
+
+    $scope.removeStudentWord = function(index){
+      console.log($scope.student1.tileBucket[index]);
+      $http.put('/api/students/' + $scope.student1._id + "/deleteBucket", {index: index});
+      $scope.currentStudentWords.splice(index, 1);
+      $scope.student1.tileBucket.splice(index, 1);
+    };
 
   //});
 

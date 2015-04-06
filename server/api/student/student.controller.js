@@ -80,6 +80,30 @@ exports.destroy = function(req, res) {
   });
 };
 
+exports.updateBucket = function(req, res){
+  var wordId = req.body.wordId;
+  Student.findById(req.params.id, function(err, student){
+    student.tileBucket.push(wordId);
+    student.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
+exports.deleteBucket = function(req, res){
+  var index = req.body.index;
+  console.log(index);
+  Student.findById(req.params.id, function(err, student){
+    console.log(student.tileBucket[index]);
+    student.tileBucket.splice(index, 1);
+    student.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

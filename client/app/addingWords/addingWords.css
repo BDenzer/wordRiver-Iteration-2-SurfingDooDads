@@ -1,7 +1,9 @@
 .thing-form {
   margin: 20px 0;
 }
-
+html, body{
+  height: 100%;
+}
 #banner {
   border-bottom: none;
   margin-top: -20px;
@@ -40,4 +42,9 @@ form{
   padding: 30px 0;
   margin-top: 70px;
   border-top: 1px solid #E5E5E5;
+}
+
+.scrollable{
+  overflow: auto;
+  height: 200px;
 }
