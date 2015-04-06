@@ -160,6 +160,20 @@ exports.updateTile = function(req, res, next) {
   });
 };
 
+exports.addWord = function(req, res, next) {
+  var userId = req.user._id;
+
+  var word = req.body.word;
+
+  User.findById(userId, function (err, user) {
+    user.tileBucket.push({wordName: word, tileTags: []});
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
+  });
+};
+
 exports.deletePack = function(req, res, next) {
   var userId = req.user._id;
 
@@ -251,20 +265,15 @@ exports.deleteStudent = function(req, res, next) {
 
 exports.updateBucket = function(req, res, next) {
   var userId = req.user._id;
-  var oldPass = String(req.body.oldPassword);
-  var newPass = String(req.body.newPassword);
+  var word = req.body.word;
   //var updates = req.body.user;
 
   User.findById(userId, function (err, user) {
-    if(user.authenticate(oldPass)) {
-      //user = updates;
+     user.tileBucket.push({wordName: word, tileTags: []});
       user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
       });
-    } else {
-      res.send(403);
-    }
   });
 };
 

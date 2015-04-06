@@ -276,6 +276,25 @@ angular.module('WordRiverApp')
       $http.put('/api/students/' + $scope.student1._id + "/updateBucket", {wordId: $scope.wordToAdd2._id});
     };
 
+    $scope.addWordsToList = function(){
+      if(0 < $scope.wordField.length){
+        if(!$scope.inBucket($scope.wordField)){
+          $http.put('/api/users/' + $scope.userId + "/updateBucket", {word: $scope.wordField});
+          $scope.tileBucket.push({wordName: $scope.wordField});
+          $scope.wordField = "";
+        }
+      }
+    };
+
+    $scope.inBucket = function(word){
+      for(var i = 0; i < $scope.tileBucket.length; i++){
+        if($scope.tileBucket[i].wordName == word){
+          return true;
+        }
+      }
+      return false;
+    };
+
   //});
 
 });
