@@ -11,6 +11,9 @@
 
 var _ = require('lodash');
 var Student = require('./student.model');
+var passport = require('passport');
+var config = require('../../config/environment');
+var jwt = require('jsonwebtoken');
 
 // Get list of things
 exports.index = function(req, res) {
@@ -50,6 +53,18 @@ exports.update = function(req, res) {
       if (err) { return handleError(res, err); }
       return res.json(200, student);
     });
+  });
+};
+
+exports.updateBucket = function(req, res) {
+  var wordId = req.body._id;
+  var id = req.params.id;
+  Student.findById(id, function (err, student) {
+      student.tileBucket.push(wordId);
+      student.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
   });
 };
 

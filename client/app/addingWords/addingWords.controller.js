@@ -253,12 +253,12 @@ angular.module('WordRiverApp')
       $scope.currentStudentWords = $scope.toWords(student.tileBucket);
       $scope.student1 = student;
 
-    }
+    };
 
     $scope.wordToAdd = function(word){
       $scope.wordToAdd1 = word.wordName;
       $scope.wordToAdd2 = word;
-    }
+    };
 
     $scope.addWord = function(){
       for(var n = 0; n < $scope.student1.tileBucket.length; n++){
@@ -267,8 +267,14 @@ angular.module('WordRiverApp')
           return;
         }
       }
+      $scope.submitWord();
+    };
+
+    $scope.submitWord = function () {
       $scope.student1.tileBucket.push($scope.wordToAdd2._id);
-    }
+      $http.put('/api/student/' + $scope.student1._id + "/updateBucket", {wordId: $scope.wordToAdd2._id});
+    };
+
 
   //});
 
