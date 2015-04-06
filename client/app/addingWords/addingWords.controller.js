@@ -22,6 +22,8 @@ angular.module('WordRiverApp')
     $scope.wordToAdd2 = null;
 
     $scope.student1 = null;
+
+    $scope.showStudent = false;
     //beforeEach(module('wordRiverTeamFtlApp'));
     //beforeEach(module('socketMock'));
 
@@ -249,6 +251,7 @@ angular.module('WordRiverApp')
     };
 
     $scope.studentInfo = function(student){
+      $scope.showStudent = true;
       $scope.currentStudent = student.firstName + " " + student.lastName;
       $scope.currentStudentWords = $scope.toWords(student.tileBucket);
       $scope.student1 = student;
