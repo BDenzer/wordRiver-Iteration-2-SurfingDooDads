@@ -295,6 +295,13 @@ angular.module('WordRiverApp')
       return false;
     };
 
+    $scope.removeStudentWord = function(index){
+      console.log($scope.student1.tileBucket[index]);
+      $http.put('/api/students/' + $scope.student1._id + "/deleteBucket", {index: index});
+      $scope.currentStudentWords.splice(index, 1);
+      $scope.student1.tileBucket.splice(index, 1);
+    };
+
   //});
 
 });

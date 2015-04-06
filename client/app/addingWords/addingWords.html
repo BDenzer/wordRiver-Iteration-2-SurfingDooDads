@@ -26,7 +26,9 @@
   <!--<ul>-->
     <!--<form name="addingWordsForm" action="checkboxes.asp" method="post">-->
       <!--<span><input type = "button" name ="CheckAll" value="Check All"></span>-->
-    <li class="list-group-item" ng-repeat="tile in tileBucket"><label><input type="button" ng-checked="" ng-click="wordToAdd(tile)"> {{tile.wordName}}</label> <span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>
+    <div class="scrollable">
+      <li class="list-group-item" ng-repeat="tile in tileBucket"><label><input type="button" ng-checked="" ng-click="wordToAdd(tile)"> {{tile.wordName}}</label> <!--<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span>--></li>
+    </div>
 
       <!--<li class="list-group-item" ng-repeat="test in data">{{test.weight}}<span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeData($index)"></span></li>-->
     <!--</form>-->
@@ -54,7 +56,7 @@
     <h1 class="page-header">{{currentStudent}}:</h1>
     <ul class="list-group">
       <li class="list-group-item" ng-repeat="words in currentStudentWords">
-        <a href="" ng-click="">{{words}}</a></li>
+        <a href="" ng-click="">{{words}}</a><span class="glyphicon glyphicon-trash floatRight" style="color: red" ng-click="removeStudentWord($index)"></span></li>
     </ul>
   </div>
 
