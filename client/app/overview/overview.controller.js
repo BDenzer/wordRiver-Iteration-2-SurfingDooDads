@@ -155,6 +155,7 @@ angular.module('WordRiverApp')
     $scope.addContextPacks = function () {
       if ($scope.textField.length >= 1) {
         $http.put('/api/users/' + $scope.userId + "/updatePack", {tagName: $scope.textField, packType: "Context"});
+        $scope.contextPacks.push({packName: $scope.textField, highlighted: ""});
         $scope.getPacks();
       }
       $scope.textField="";

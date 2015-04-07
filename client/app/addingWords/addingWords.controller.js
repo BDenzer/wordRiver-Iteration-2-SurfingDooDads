@@ -283,6 +283,7 @@ angular.module('WordRiverApp')
       if(0 < $scope.wordField.length){
         if(!$scope.inBucket($scope.wordField)){
           $http.put('/api/users/' + $scope.userId + "/updateBucket", {word: $scope.wordField});
+          $scope.getPacks();
           $scope.tileBucket.push({wordName: $scope.wordField});
           $scope.wordField = "";
         }
