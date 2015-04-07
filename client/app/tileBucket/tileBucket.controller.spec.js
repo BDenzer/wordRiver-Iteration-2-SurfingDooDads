@@ -23,13 +23,13 @@ describe('Controller: TileBucketCtrl', function () {
   it('getById test', function() {
     var testArray = [{_id:0},{_id:1},{_id:0},{_id:"5"}];
     var id = "5";
-    expect(scope.getById(testArray,id)).toEqual({_id:"5"});
+    expect(scope.getById(testArray,id)).toEqual([{_id:"5"}]);
   });
 
   it('displayContext test', function() {
     var tile = {tileTags:["id2"]};
     scope.tileTags = [{_id:"id1", tagType:"notContext"},{_id:"id2",tagType:"Context",tagName:"This is a context pack"}];
-    expect(scope.displayContext(tile)).toEqual("This is a context pack" + ", ");
+    expect(scope.displayContext(tile)).toEqual("This is a context pack");
   });
 
   it('displayWordType test', function() {
@@ -41,6 +41,6 @@ describe('Controller: TileBucketCtrl', function () {
   it('displayOtherTags test', function() {
     var tile = {tileTags:["id2"]};
     scope.tileTags = [{_id:"id1", tagType:"notContext"},{_id:"id2",tagType:"OtherTags",tagName:"th,sh,.."}];
-    expect(scope.displayOtherTags(tile)).toEqual("th,sh,.." + ", ");
+    expect(scope.displayOtherTags(tile)).toEqual("th,sh,..");
   });
 });
