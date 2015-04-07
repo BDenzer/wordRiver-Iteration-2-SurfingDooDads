@@ -97,7 +97,7 @@ exports.updatePack = function(req, res, next) {
   var packType = req.body.packType;
 
   User.findById(userId, function (err, user) {
-      user.tileTags.push({"tagName": tagName, "packType": packType});
+      user.tileTags.push({"tagName": tagName, "tagType": packType});
       user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
