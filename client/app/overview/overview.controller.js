@@ -21,7 +21,7 @@ angular.module('WordRiverApp')
         $scope.studentGroups = user.studentGroups;
         $scope.studentList = user.studentList;
 
-        //socket.syncUpdates('pack', $scope.contextPacks);
+        socket.syncUpdates('pack', $scope.contextPacks);
       }).success(function(){
         $scope.getStudents();
       });
@@ -155,7 +155,7 @@ angular.module('WordRiverApp')
     $scope.addContextPacks = function () {
       if ($scope.textField.length >= 1) {
         $http.put('/api/users/' + $scope.userId + "/updatePack", {tagName: $scope.textField, packType: "context"});
-        $scope.contextPacks.push({packName: $scope.textField, tiles: []});
+        $scope.getPacks();
       }
       $scope.textField="";
     };
@@ -163,7 +163,7 @@ angular.module('WordRiverApp')
     $scope.addTile = function() {
       if ($scope.tileField.length >= 1) {
         $scope.currentPack.tiles.push({wordName: $scope.tileField});
-
+        console.log($scope.currentPack._id);
         $http.put('/api/users/' + $scope.userId + "/updateTile", {word: $scope.tileField, packId: $scope.currentPack._id});
 
         //$http.post('/api/packs', {packName: $scope.currentPack.packName, tiles: $scope.currentPack.tiles});
